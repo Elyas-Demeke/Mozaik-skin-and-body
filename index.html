@@ -20,6 +20,8 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- main css -->
+    <link rel="stylesheet" href="./styling/main.css">
 
     <!-- Google fonts -->
     <link
@@ -36,7 +38,7 @@
   </head>
 
   <body>
-    <div id="app" v-bind:title="timestamp" class="experiment-block">
+    <div id="app" class="experiment-block">
       <ais-instant-search
         index-name="Product"
         v-bind:search-client="searchClient"
@@ -46,37 +48,50 @@
           :snippet-ellipsis-text.camel="'…'"
           :remove-words-if-no-result.camel="'allOptional'"
         />
-        <header class="p-5">
+        <header class="py-5 container">
           <ais-search-box
             submit-title="Submit the query"
-            :autofocus="true"
             :class-names="{
-                'ais-SearchBox-submit': 'btn btn-primary',
-                'ais-SearchBox-input': 'form-control inline-block',
-                'ais-SearchBox-form': 'd-flex gap-3 w-50 mx-auto',
+                'ais-SearchBox': 'row justify-content-end',
+                'ais-SearchBox-submit': 'btn btn-primary rounded-0',
+                'ais-SearchBox-input': 'form-control inline-block border-0 shadow-none mw-50',
+                'ais-SearchBox-form': 'd-flex gap-3 col-md-12 col-xl-10 justify-content-end border rounded p-1',
                 'ais-SearchBox-reset': 'btn btn-danger'
             }"
           >
-            <template #submit-icon>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 18 18"
-                width="16"
-                height="16"
-              >
-                <g
-                  fill="none"
-                  fill-rule="evenodd"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.67"
-                  transform="translate(1 1)"
+            <template v-slot="{ aisSearchBox, refine, currentRefinement, isSearchStalled }">
+              <form action="" role="search" novalidate="novalidate"
+                :class="searchInputFocused ? 'border-primary border-2 shadow shadow-info shadow-intensity-lg': 'border-dark'"
+                class="ais-SearchBox-form d-flex justify-content-end border rounded p-1">
+                <button v-if="currentRefinement === ''" type="submit" title="Submit the query" class="ais-SearchBox-submit btn  rounded-0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="16" height="16"><g fill="none" fill-rule="evenodd" :stroke="searchInputFocused ? 'blue' : 'currentColor'" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.67" transform="translate(1 1)"><circle cx="7.11" cy="7.11" r="7.11"></circle> <path d="M16 16l-3.87-3.87"></path></g></svg></button> <button type="reset" title="Clear" hidden="hidden" class="ais-SearchBox-reset btn btn-danger"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" class="ais-SearchBox-resetIcon"><path d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z" fillRule="evenodd"></path></svg></button>
+                <button v-if="currentRefinement !== ''" @click="refine(''); $refs.query.focus()" type="reset" title="Clear" class="ais-SearchBox-reset btn"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" class="ais-SearchBox-resetIcon"><path fill="blue" d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z" fillRule="evenodd"></path></svg></button>
+                <input
+                :value="currentRefinement"
+                @input="refine($event.currentTarget.value)"
+                @focus="searchInputFocused = true" @blur="searchInputFocused = false"
+                :class="currentRefinement === '' && !searchInputFocused ? 'w-no-text': 'w-with-text'"
+                :placeholder="searchInputFocused ? '':'Search here…'" class="ais-SearchBox-input form-control inline-block border-0 shadow-none mw-50"
+                ref="query"
+                type="search" 
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="off"
+                spellcheck="false"
+                required="required"
+                maxlength="512"
+                aria-label="Search"
                 >
-                  <circle cx="7.11" cy="7.11" r="7.11" />
-                  <path d="M16 16l-3.87-3.87" />
-                </g>
-              </svg>
+                <button v-if="currentRefinement === ''" class="btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="h4" style="margin-bottom: 0;"><path d="M12 15c1.66 0 2.99-1.34 2.99-3L15 6c0-1.66-1.34-3-3-3S9 4.34 9 6v6c0 1.66 1.34 3 3 3zm-1.2-9.1c0-.66.54-1.2 1.2-1.2s1.2.54 1.2 1.2l-.01 6.2c0 .66-.53 1.2-1.19 1.2s-1.2-.54-1.2-1.2V5.9zm6.5 6.1c0 3-2.54 5.1-5.3 5.1S6.7 15 6.7 12H5c0 3.41 2.72 6.23 6 6.72V22h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"></path></svg>
+                </button>
+                <span class="w-1"></span>
+                <button v-if="currentRefinement === ''" class="btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.12 4l1.83 2H20v12H4V6h4.05l1.83-2h4.24M15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2zm-3 7c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3m0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"></path></svg>
+                </button>
+                <button v-if="currentRefinement !== ''" class="btn btn-primary">Search</button>
+              </form>
+              <span :hidden="!isSearchStalled">Loading...</span>
             </template>
           </ais-search-box>
         </header>
@@ -90,7 +105,7 @@
           <template v-slot="{ items, sendEvent }">
             <div class="container py-5">
                 <div v-for="item in items" :key="item.objectID" class="row justify-content-center mb-3">
-                  <div class="col-md-12 col-xl-10">
+                  <div class="col-md-12 col-xl-10 p-0">
                     <div class="card shadow-0 border rounded-3">
                       <div class="card-body">
                         <div class="row">
@@ -151,17 +166,6 @@
                   </div>
                 </div>
               </div>
-            <!-- <ul>
-              <li v-for="item in items" :key="item.objectID">
-                <h1>{{ item.name }}</h1>
-                <button
-                  type="button"
-                  @click="sendEvent('click', item, 'Item Added')"
-                >
-                  Add to cart
-                </button>
-              </li>
-            </ul> -->
           </template>
           </ais-hits>
         </main>
@@ -172,12 +176,11 @@
       const app = new Vue({
         el: "#app",
         data: {
-          message: "🐵 Hello World 🔮",
-          timestamp: `Timestamp ${new Date().toLocaleString()}`,
           searchClient: algoliasearch(
             "1LSUQ7GW58",
             "386f5ab5b40107abc10ff3863afa7e90"
           ),
+          searchInputFocused: false,
         },
         methods: {
           transformItems(items, { results }) {
@@ -186,7 +189,15 @@
               position: { index, page: results.page },
             }));
           },
+          test() {
+            console.log('test');
+          }
         },
+        watch: {
+          searchInputFocused() {
+            
+          }
+        }
       });
     </script>
     <script
