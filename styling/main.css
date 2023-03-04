@@ -1,28 +1,44 @@
 .form-control {
-    transition: all .3s ease-in-out !important;
-    transition-timing-function: cubic-bezier(.47,1.64,.41,.8);
+  transition: all 0.3s ease-in-out !important;
+  transition-timing-function: cubic-bezier(0.47, 1.64, 0.41, 0.8);
 }
 
 .ais-SearchBox-form {
-    width: fit-content !important;
-    margin-right: 106px;
+  width: fit-content !important;
+  /* margin-right: 106px; */
 }
 /* clears the ‘X’ from Internet Explorer */
-input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
-input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
 /* clears the ‘X’ from Chrome */
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration { display: none; }
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
 body {
   overflow-y: scroll;
 }
 
 .w-no-text {
-    width: 20rem !important;
+  width: 20rem !important;
 }
 
 .w-with-text {
-    width: 61rem !important;
+  width: 76rem !important;
+}
+.z-30 {
+  z-index: 30;
+}
+.z-20 {
+  z-index: 20;
 }
