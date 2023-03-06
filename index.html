@@ -62,7 +62,7 @@
           >
             <template v-slot="{ aisSearchBox, refine, currentRefinement, isSearchStalled }">
               <form action="" role="search" novalidate="novalidate"
-                :class="searchInputFocused ? 'border-primary border-2 shadow shadow-info shadow-intensity-lg': 'border-dark'"
+                :class="searchInputFocused ? 'border-primary border-2': 'border-dark'"
                 class="ais-SearchBox-form d-flex justify-content-end border rounded p-1 position-relative z-30">
                 <button v-if="currentRefinement === ''" type="submit" title="Submit the query" class="ais-SearchBox-submit btn  rounded-0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="16" height="16"><g fill="none" fill-rule="evenodd" :stroke="searchInputFocused ? 'blue' : 'currentColor'" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.67" transform="translate(1 1)"><circle cx="7.11" cy="7.11" r="7.11"></circle> <path d="M16 16l-3.87-3.87"></path></g></svg></button> <button type="reset" title="Clear" hidden="hidden" class="ais-SearchBox-reset btn btn-danger"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" class="ais-SearchBox-resetIcon"><path d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z" fillRule="evenodd"></path></svg></button>
                 <button v-if="currentRefinement !== ''" @click="refine(''); $refs.query.focus()" type="reset" title="Clear" class="ais-SearchBox-reset btn"><svg role="img" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" class="ais-SearchBox-resetIcon"><path fill="blue" d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z" fillRule="evenodd"></path></svg></button>
@@ -103,59 +103,19 @@
             >
           <template v-slot="{ items, sendEvent }">
             <div class="container py-5 px-0">
-                <div v-for="item in items" :key="item.objectID" class="row justify-content-center">
+                <div v-for="item in items" :key="item.objectID" class="row justify-content-center bg-light">
                   <div class="col-md-12 col-xl-12 p-0">
-                    <div class="card shadow-0 border rounded-3">
+                    <div class="card shadow-0 border-0 rounded-3">
                       <div class="card-body">
                         <div class="row">
-                          <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
-                            <div class="bg-image hover-zoom ripple rounded ripple-surface">
-                              <img :src="item.image !== '' ? 'https://emmano.pl/media/'+item.image : 'https://dummyimage.com/640x360/fff/aaa'"
-                                class="w-100" />
-                              <a href="#!">
-                                <div class="hover-overlay">
-                                  <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
-                                </div>
-                              </a>
-                            </div>
-                          </div>
-                          <div class="col-md-6 col-lg-6 col-xl-6">
-                            <h5>{{ item.name }}</h5>
-                            <div class="d-flex flex-row">
-                              <div class="text-danger mb-1 me-2">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                          <div class="col-12 mb-4 mb-lg-0">
+                            <div class="bg-image hover-zoom ripple rounded ripple-surface d-flex gap-3">
+                              <div>
+                                <svg viewBox="0 0 24 24" height="24" fill="currentColor"><path d="M19.8 18.8L15.6 14.6C16.6 13.4 17.1 12 17.1 10.5C17.1 6.9 14.2 4 10.6 4C6.9 4 4 6.9 4 10.5C4 14.1 6.9 17 10.5 17C12 17 13.4 16.5 14.6 15.5L18.8 19.7C18.9 19.8 19.1 19.9 19.3 19.9C19.5 19.9 19.7 19.8 19.8 19.7C19.9 19.6 20 19.4 20 19.2C20 19.1 19.9 18.9 19.8 18.8ZM10.5 15.6C7.7 15.6 5.4 13.3 5.4 10.5C5.4 7.7 7.7 5.4 10.5 5.4C13.3 5.4 15.6 7.7 15.6 10.5C15.6 13.4 13.4 15.6 10.5 15.6Z"></path></svg>
                               </div>
-                              <span>310</span>
-                            </div>
-                            <div class="mt-1 mb-0 text-muted small">
-                              <span>100% cotton</span>
-                              <span class="text-primary"> • </span>
-                              <span>Light weight</span>
-                              <span class="text-primary"> • </span>
-                              <span>Best finish<br /></span>
-                            </div>
-                            <div class="mb-2 text-muted small">
-                              <span>Unique design</span>
-                              <span class="text-primary"> • </span>
-                              <span>For men</span>
-                              <span class="text-primary"> • </span>
-                              <span>Casual<br /></span>
-                            </div>
-                            <p class="text-truncate mb-4 mb-md-0">{{ item.short_description ? item.short_description : 'lorem ipsum sit dolor amet sit aba lse. joh lske. asdf jkelo jiul jijlalj.'}}</p>
-                          </div>
-                          <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
-                            <div class="d-flex flex-row align-items-center mb-1">
-                              <h4 class="mb-1 me-1">$13.99</h4>
-                              <span class="text-danger"><s>$20.99</s></span>
-                            </div>
-                            <h6 class="text-success">Free shipping</h6>
-                            <div class="d-flex flex-column mt-4">
-                              <button class="btn btn-primary btn-sm" type="button">Details</button>
-                              <button class="btn btn-outline-primary btn-sm mt-2" type="button">
-                                Add to wishlist
+                              <h5 class="m-0">{{ item.name }}</h5>
+                              <button @click="refine(item.name)" class="btn ml-auto">
+                                <svg viewBox="0 0 24 24" height="24" fill="gray"><path d="M8 17v-7.586l8.293 8.293c0.391 0.391 1.024 0.391 1.414 0s0.391-1.024 0-1.414l-8.293-8.293h7.586c0.552 0 1-0.448 1-1s-0.448-1-1-1h-10c-0.552 0-1 0.448-1 1v10c0 0.552 0.448 1 1 1s1-0.448 1-1z"></path></svg>
                               </button>
                             </div>
                           </div>
@@ -184,9 +144,8 @@
             </div>
           </section>
     
-          <div class="album py-5 bg-light">
+          <div class="album py-5 bg-info">
             <div class="container">
-    
               <div class="row">
                 <div class="col-md-4">
                   <div class="card mb-4 box-shadow">
