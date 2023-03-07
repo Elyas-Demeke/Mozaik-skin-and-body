@@ -45,3 +45,7 @@ body {
 .ml-auto {
   margin-left: auto;
 }
+
+.bg-custom-gray {
+  background-color: #e9e9e9;
+}

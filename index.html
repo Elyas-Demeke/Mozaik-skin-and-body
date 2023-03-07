@@ -103,6 +103,11 @@
             >
           <template v-slot="{ items, sendEvent }">
             <div class="container py-5 px-0">
+                <div v-if="items.length" class="row justify-content-center bg-custom-gray">
+                  <div class="col-12 p-3">
+                    <span class="text-gray-800 fs-6 ">Popular Searches</span>
+                  </div>
+                </div>
                 <div v-for="item in items" :key="item.objectID" class="row justify-content-center bg-light">
                   <div class="col-md-12 col-xl-12 p-0">
                     <div class="card shadow-0 border-0 rounded-3">
