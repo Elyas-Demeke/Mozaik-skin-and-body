@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue Test</title>
+
+    <!-- This is a development version of Vue.js! -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link
+      href="https://unpkg.com/filepond@^4/dist/filepond.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+      rel="stylesheet"
+    />
+    <!-- Google fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap v5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      .filepond--drop-label {
+        background-color: rgb(209, 70, 28);
+        height: auto !important;
+        border-radius: 6px;
+        display: flex;
+        cursor: pointer;
+      }
+      .filepond--label-action {
+        text-decoration: none;
+        font-size: 22px !important;
+        font-weight: 900;
+        color: white;
+        background-color: rgb(209, 70, 28);
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="app" class="experiment-block">
+      <form @submit="e => e.preventDefault()" class="container">
+        <div style="max-width: 430px" class="form-group mx-auto mt-3">
+          <input type="file" />
+          <div
+          v-if="files.length"
+          >
+              <span
+              onclick="document.querySelector('#upload').click()"
+              style="display: block"
+              class="btn btn-primary"
+              id="addMore"
+              >
+              + DODAJ ZDJECIA 
+            </span>
+            <button
+            style="width: 100%;"
+            class="btn d-block btn-success mt-3">
+                Dodaj do koszyka
+            </button>
+        </div>
+        </div>
+      </form>
+    </div>
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+
+    <script type="module">
+      const app = new Vue({
+        el: "#app",
+        data: {
+          files: [],
+        },
+      });
+      // Get a reference to the file input element
+      const inputElement = document.querySelector('input[type="file"]');
+
+      FilePond.registerPlugin(FilePondPluginImagePreview);
+
+      // Create a FilePond instance
+      const pond = FilePond.create(inputElement, {
+        allowMultiple: true,
+        imagePreviewHeight: 155,
+        labelIdle: `
+            <div style="width:100%;height:100%;" id="upload">
+                <span class="filepond--label-action" tabindex="0">
+                    + DODAJ ZDJECIA
+                </span>        
+            </div>
+        `,
+        itemInsertLocation: "after",
+        onupdatefiles: (files) => {
+          app.files = files;
+          if (files.length) {
+            document.querySelector(".filepond--drop-label").style.display = "none";
+          } else {
+            document.querySelector(".filepond--drop-label").style.display = "flex";
+          }
+        },
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
