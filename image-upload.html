@@ -42,32 +42,50 @@
         color: white;
         background-color: rgb(209, 70, 28);
       }
-
     </style>
   </head>
 
   <body>
     <div id="app" class="experiment-block">
-      <form @submit="e => e.preventDefault()" class="container">
+      <form @submit="e => e.preventDefault()" class="container" id="form">
         <div style="max-width: 430px" class="form-group mx-auto mt-3">
           <input type="file" />
-          <div
-          v-if="files.length"
-          >
-              <span
+          <div v-if="files.length">
+            <span
               onclick="document.querySelector('#upload').click()"
               style="display: block"
               class="btn btn-primary"
               id="addMore"
-              >
-              + DODAJ ZDJECIA 
+            >
+              + DODAJ ZDJECIA
             </span>
             <button
-            style="width: 100%;"
-            class="btn d-block btn-success mt-3">
-                Dodaj do koszyka
+              style="width: 100%"
+              class="btn d-block btn-success mt-3"
+              data-bs-toggle="modal"
+              data-bs-target="#addClientModal"
+              @click="processFiles"
+            >
+              Dodaj do koszyka
             </button>
-        </div>
+
+            <div
+              class="modal fade"
+              id="addClientModal"
+              aria-labelledby="addClientModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="addClientModalLabel">
+                      We are creating your product
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -79,32 +97,58 @@
         el: "#app",
         data: {
           files: [],
+          pond: null,
         },
-      });
-      // Get a reference to the file input element
-      const inputElement = document.querySelector('input[type="file"]');
+        methods: {
+          async processFiles() {
+            const processedFiles = await this.pond.processFiles();
+            processedFiles.forEach(file => {
+              const serverId = JSON.parse(file.serverId).id
+              const node = document.createElement('input')
+              node.name = `pbid|1334|${serverId}`
+              node.value = "1"
+              node.style.maxWidth = "430px"
+              node.classList.add('d-block','my-3', 'form-control', 'mx-auto')
+              document.querySelector("#form").appendChild(node)
+            })
+            this.pond.removeFiles()
+          },
+        },
+        mounted() {
+          // Get a reference to the file input element
+          const inputElement = document.querySelector('input[type="file"]');
 
-      FilePond.registerPlugin(FilePondPluginImagePreview);
+          FilePond.registerPlugin(FilePondPluginImagePreview);
 
-      // Create a FilePond instance
-      const pond = FilePond.create(inputElement, {
-        allowMultiple: true,
-        imagePreviewHeight: 155,
-        labelIdle: `
+          // Create a FilePond instance
+          this.pond = FilePond.create(inputElement, {
+            name: "image",
+            server: "https://emmano.pl/api-cart/images",
+            allowMultiple: true,
+            imagePreviewHeight: 155,
+            instantUpload: false,
+            labelIdle: `
             <div style="width:100%;height:100%;" id="upload">
                 <span class="filepond--label-action" tabindex="0">
                     + DODAJ ZDJECIA
                 </span>        
             </div>
         `,
-        itemInsertLocation: "after",
-        onupdatefiles: (files) => {
-          app.files = files;
-          if (files.length) {
-            document.querySelector(".filepond--drop-label").style.display = "none";
-          } else {
-            document.querySelector(".filepond--drop-label").style.display = "flex";
-          }
+            itemInsertLocation: "after",
+            onupdatefiles: (files) => {
+              app.files = files;
+              if (files.length) {
+                document.querySelector(".filepond--drop-label").style.display =
+                  "none";
+              } else {
+                document.querySelector(".filepond--drop-label").style.display =
+                  "flex";
+              }
+            },
+            onprocessfiles: (files) => {
+              document.querySelector('#addClientModal').click()              
+            }
+          });
         },
       });
     </script>
