@@ -32,6 +32,11 @@
       rel="stylesheet"
     />
     <style>
+      .experiment-block {
+        width: 65%;
+        margin: auto;
+        padding-top: 5em;
+      }
       .row-container {
         flex-basis: 33.33333%;
         max-width: 33.33333%;
@@ -44,8 +49,8 @@
         font-weight: 700;
         font-family: Nunito;
         margin: 10px 0 0;
-    }
-    .title {
+      }
+      .title {
         font-size: 14px;
         font-weight: 400;
         line-height: 20px;
@@ -69,11 +74,95 @@
       svg:not(:root) {
         overflow: hidden;
       }
+      .accordion {
+        margin: 1.3rem 0;
+        details {
+          background-color: #f8f7f3;
+          border-radius: 10px;
+          transition: background-color ease-in-out 0.2s;
+          overflow: hidden;
+        }
+        details[open] {
+          background-color: #ffeccc;
+        }
+        summary {
+          display: flex;
+          position: relative;
+          line-height: 1;
+          padding: 1.5rem 1.8rem;
+          align-items: center;
+          cursor: pointer;
+          list-style: none;
+        }
+        @media screen and (min-width: 750px) {
+          summary {
+            padding: 2.4rem 2.1rem;
+          }
+        }
+        .summary__title {
+          display: flex;
+          flex: 1;
+        }
+        @media screen and (min-width: 750px) {
+          .accordion__title {
+            font-size: 2rem;
+            line-height: 3rem;
+          }
+        }
+        .accordion__title {
+          display: inline-block;
+          max-width: calc(100% - 6rem);
+          min-height: 1.6rem;
+          margin: 0;
+          word-break: break-word;
+          font-weight: 600;
+          font-size: 1.6rem;
+          line-height: 2.4rem;
+        }
+        details[open] > summary .icon-plus {
+          transform: rotate(-45deg);
+        }
+        @media screen and (min-width: 750px) {
+          .accordion .icon-plus {
+            margin-right: 0.15rem;
+          }
+        }
+        .icon-plus {
+          height: 1.65rem;
+          transition: transform ease-in-out 0.2s;
+          margin-left: auto;
+        }
+        .accordion__content {
+          padding: 0 2.1rem;
+        }
+        details[open] > .accordion__content {
+          margin-top: 0;
+        }
+        .accordion__content {
+          margin-bottom: 1.5rem;
+          word-break: break-word;
+          overflow-x: auto;
+          padding: 0 1.8rem 3.3rem;
+          font-weight: 400;
+          font-size: 1.6rem;
+          line-height: 2.4rem;
+          margin-top: -50px;
+          transition: margin-top ease-in-out 0.25s;
+        }
+        @media screen and (min-width: 750px) {
+          .accordion__content {
+            padding: 0 2.1rem 2.4rem;
+            font-size: 1.8rem;
+            line-height: 2.8rem;
+          }
+        }
+      }
     </style>
   </head>
 
   <body>
     <div id="app" class="experiment-block">
+      <!-- slider -->
       <div class="d-flex flex-wrap">
         <div class="flex-grow-1 row-container">
           <div>
@@ -187,17 +276,169 @@
           </div>
         </div>
       </div>
+      <!-- lablet -->
+      <div class="accordion">
+        <details>
+          <summary
+            role="button"
+            aria-expanded="false"
+            aria-controls="ProductAccordion-8be2d08e-fe75-464f-9213-fd3dc5747be0-template--17995893014794__main"
+          >
+            <div class="summary__title">
+              <h2 class="h4 accordion__title">Produktdetails</h2>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+              role="presentation"
+              class="icon icon-plus"
+              fill="none"
+              viewBox="0 0 10 10"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M1 4.51a.5.5 0 000 1h3.5l.01 3.5a.5.5 0 001-.01V5.5l3.5-.01a.5.5 0 00-.01-1H5.5L5.49.99a.5.5 0 00-1 .01v3.5l-3.5.01H1z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </summary>
+          <div class="accordion__content rte">
+            <ul>
+              <li>Material: Acrylglas</li>
+              <li>Maße: 150 x 143,2 mm - 15mm Dicke</li>
+              <li>Leichte Farbabweichungen beim Druck möglich</li>
+              <li>Keine kyrillischen oder chinesischen Zeichen möglich</li>
+              <li>Emojis können nicht gedruckt werden</li>
+            </ul>
+            <ul></ul>
+            <meta charset="UTF-8" />
+            <ul></ul>
+          </div>
+        </details>
+      </div>
+      <div class="accordion">
+        <details>
+          <summary
+            role="button"
+            aria-expanded="false"
+            aria-controls="ProductAccordion-8be2d08e-fe75-464f-9213-fd3dc5747be0-template--17995893014794__main"
+          >
+            <div class="summary__title">
+              <h2 class="h4 accordion__title">Häufige Fragen</h2>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+              role="presentation"
+              class="icon icon-plus"
+              fill="none"
+              viewBox="0 0 10 10"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M1 4.51a.5.5 0 000 1h3.5l.01 3.5a.5.5 0 001-.01V5.5l3.5-.01a.5.5 0 00-.01-1H5.5L5.49.99a.5.5 0 00-1 .01v3.5l-3.5.01H1z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </summary>
+          <div class="accordion__content rte">
+            <meta charset="utf-8" /><meta charset="utf-8" />
+            <p>
+              &nbsp;<strong
+                >1. Meine Rasse ist auf der Produktseite nicht zu finden. Was
+                jetzt?</strong
+              >
+            </p>
+            <p>
+              Das tut uns leid! Wir bieten derzeit eine Auswahl aus über 1500
+              verschiedenen Rassen und Fellfarben an und arbeiten konstant
+              daran, unsere Auswahl zu erweitern. Sollte deine Fellnase trotzdem
+              nicht dabei sein, bitten wir dich um Geduld oder verweisen dich
+              gerne auf eines unserer anderen Produkte mit Bild Upload Funktion.
+            </p>
+            <p><strong>2. Wie lange dauert der Versand?</strong></p>
+            <p>
+              Unsere aktuelle Versandzeit liegt bei 3-5 Werktagen. Es kann
+              vereinzelt zu Verzögerungen bei den Versand Dienstleistern kommen,
+              die wir nicht beeinflussen können. Daher sind unsere
+              Versandangaben nur ein Richtwert, aber keine rechtliche Garantie.
+            </p>
+            <p>
+              <strong
+                >3. Können Emojis und andere Zeichen mitgedruckt werden?</strong
+              >
+            </p>
+            <p>
+              Leider können Emojis, Chinesische
+              oder&nbsp;k<span>yrillische</span>&nbsp;Zeichen, sowie andere
+              Sonderzeichen nicht mitgedruckt werden.&nbsp;Sollten diese mit
+              ausgewählt wurden sein, werden diese beim Druck als Leerzeichen
+              dargestellt.&nbsp;Daher ist es wichtig ausschließlich Buchstaben
+              aus dem lateinischem Alphabet auf der Tastatur zu nutzen.
+            </p>
+            <p>
+              <strong
+                >4.<span
+                  >&nbsp;Was muss ich bei meiner Fotoauswahl beachten</span
+                >?<br
+              /></strong>
+            </p>
+            <p>
+              Bei der Auswahl der Fotos sollte beachtet werden, dass das Foto
+              eine gute Belichtung aufweist (am besten Tageslicht und kein
+              Blitzlicht), zudem sollte das Foto scharf und vorher nicht
+              bearbeitet wurden sein. Bitte beachte, dass wir nicht jede
+              Bestellung überprüfen können und daher die Auswahl des Fotos in
+              Verantwortung des Kundens liegt.
+            </p>
+            <p>
+              <strong
+                >5. Meine Ware konnte nicht zugestellt werden, was mache ich
+                nun?</strong
+              >
+            </p>
+            <p>
+              Leider haben wir keine Einflüsse auf die Transportunternehmen und
+              können daher keine Verantwortung für die Auslieferung übernehmen.
+              Bitte prüfe bei Bestellaufgabe die Lieferanschrift, diese wird
+              ebenfalls erneut in der Bestell- und Versandbestätigung angezeigt.
+              Sollte die Ware aus irgend einem Grund retourniert werden,
+              bestätige uns noch einmal&nbsp;die&nbsp;vollständige
+              Lieferanschrift, sowie eine Telefonnummer. Gerne senden wir die
+              Ware so schnell wie möglich erneut raus.
+            </p>
+            <p>
+              <strong
+                >6. Kann ich die Ware in eine Packstation liefern
+                lassen?</strong
+              >
+            </p>
+            <p>
+              Die&nbsp;Lieferung in eine Packstation ist leider nicht möglich.
+              Die Ware wird bei Angabe solcher Anschriften immer retourniert.
+              Daher ist diese Option leider nicht möglich.
+            </p>
+            <p>
+              <span style="color: #dd9413"
+                ><strong
+                  >Du hast noch Fragen? Dann kontaktiere uns per E-Mail unter
+                  support@petprinted.de</strong
+                ></span
+              >
+            </p>
+          </div>
+        </details>
+      </div>
     </div>
 
     <script type="module">
       const app = new Vue({
         el: "#app",
-        data: {
-          files: [],
-          key: {
-            answer: "",
-          },
-        },
+        data: {},
       });
     </script>
     <script
