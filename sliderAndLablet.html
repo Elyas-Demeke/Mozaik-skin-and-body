@@ -31,6 +31,13 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" type="text/css" href="./css/zoomOnHover.css" />
+
+    <link href="//unpkg.com/viewerjs/dist/viewer.css" rel="stylesheet" />
+    <script src="//unpkg.com/vue@legacy"></script>
+    <script src="//unpkg.com/viewerjs"></script>
+    <script src="//unpkg.com/v-viewer@legacy"></script>
+
     <style>
       .experiment-block {
         width: 65%;
@@ -157,11 +164,134 @@
           }
         }
       }
+      .zoom-parent {
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .product-images {
+        width: 929px;
+        position: relative;
+      }
+      .vertical-image-selector {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        max-height: 94%;
+        overflow: auto;
+        z-index: 50;
+        left: 30px;
+        top: 30px;
+        div {
+          margin-bottom: 15px;
+          cursor: pointer;
+          transition-property: opacity;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-duration: 150ms;
+        }
+        div:hover {
+          opacity: 85%;
+        }
+      }
+      .vertical-image-selector::-webkit-scrollbar {
+        width: 5px;
+      }
+      .vertical-image-selector::-webkit-scrollbar-track {
+        background: #c1c1c1;
+      }
+
+      .vertical-image-selector::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 6px;
+      }
+
+      .vertical-image-selector::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      .img-parent {
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+        overflow: hidden;
+        img {
+          width: 100%;
+        }
+      }
+      .border-2-black {
+        border: 2px solid black;
+      }
+      .border-2-white {
+        border: 2px solid white;
+      }
+      .image {
+        height: 200px;
+        cursor: pointer;
+        margin: 5px;
+        display: inline-block;
+      }
+      .full-screen {
+        position: absolute;
+        z-index: 50;
+        right: 30px;
+        top: 30px;
+        border: none;
+        border-radius: 5px;
+        padding: 6px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .product-images:hover .full-screen {
+        opacity: 1;
+      }
     </style>
   </head>
 
   <body>
     <div id="app" class="experiment-block">
+      <div class="product-images">
+        <div class="vertical-image-selector">
+          <div
+            @click="activateImage(index)"
+            v-for="(image, index) in images"
+            :key="image"
+          >
+            <div
+              :class="activeImageIndex === index ? 'border-2-black': 'border-2-white'"
+              class="img-parent"
+            >
+              <img :src="image" alt="" />
+            </div>
+          </div>
+        </div>
+        <button class="full-screen" type="button" @click="show">
+          <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            id="maximize"
+            class="icon glyph"
+          >
+            <path
+              d="M10.71,14.71,5.41,20H10a1,1,0,0,1,0,2H4a2,2,0,0,1-1.38-.56l0,0s0,0,0,0A2,2,0,0,1,2,20V14a1,1,0,0,1,2,0v4.59l5.29-5.3a1,1,0,0,1,1.42,1.42ZM21.44,2.62s0,0,0,0l0,0A2,2,0,0,0,20,2H14a1,1,0,0,0,0,2h4.59l-5.3,5.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L20,5.41V10a1,1,0,0,0,2,0V4A2,2,0,0,0,21.44,2.62Z"
+              style="fill: #231f20"
+            ></path>
+          </svg>
+        </button>
+        <swiper-container @slideChange="slideChanges" ref="imgs">
+          <swiper-slide
+            @slideChange="slideChanges"
+            v-for="image in images"
+            :key="image"
+          >
+            <div class="zoom-parent">
+              <zoom-on-hover :img-normal="image"></zoom-on-hover>
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+      <!-- separator -->
+      <div style="height: 80px"></div>
       <p>Order on Monday before 10:00 AM</p>
       <div class="d-flex flex-wrap">
         <div class="flex-grow-1 row-container">
@@ -1021,9 +1151,18 @@
       </div>
     </div>
 
+    <script type="text/javascript" src="./js/zoomOnHover.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
     <script type="module">
+      Vue.use(VueViewer.default);
       const app = new Vue({
         el: "#app",
+        components: { zoomOnHover },
+        directives: {
+          viewer: VueViewer.directive({
+            debug: true,
+          }),
+        },
         data: {
           mondayDateBeforeTen: new Date(2024, 3, 8),
           mondayDateAfterTen: new Date(2024, 3, 8),
@@ -1031,6 +1170,12 @@
           fridayDateAfterTen: new Date(2024, 3, 5),
           saturdayDate: new Date(2024, 3, 6),
           sundayDate: new Date(2024, 3, 7),
+          images: [
+            "./assets/product-placement-image.png",
+            "./assets/product-placement-image-2.png",
+            "./assets/product-placement-image-3.png",
+          ],
+          activeImageIndex: 0,
         },
         created() {
           /** We are creating arbitrary times for all conditions for testing here. This won't be necessary for production when the data comes from an API. */
@@ -1039,7 +1184,40 @@
           this.fridayDateBeforeTen.setHours(8, 23, 0, 0);
           this.fridayDateAfterTen.setHours(11, 30, 0, 0);
         },
+        mounted() {
+          this.$refs.imgs.swiper.on("slideChange", ($event) => {
+            this.activeImageIndex = $event.activeIndex;
+          });
+        },
         methods: {
+          show() {
+            this.$viewerApi({
+              images: this.images,
+              options: {
+                initialViewIndex: this.activeImageIndex,
+                inline: true,
+                button: true,
+                navbar: true,
+                title: false,
+                toolbar: false,
+                tooltip: false,
+                movable: false,
+                zoomable: true,
+                rotatable: false,
+                scalable: false,
+                transition: true,
+                fullscreen: false,
+                keyboard: true,
+              },
+            });
+          },
+          activateImage(index) {
+            this.activeImageIndex = index;
+            this.$refs.imgs.swiper.slideTo(index, 150, false);
+          },
+          slideChanges() {
+            console.log("slide changed");
+          },
           checkShippingDate(dateToCheck) {
             const day = dateToCheck.getDay();
             if (day > 0 && day < 5) {
@@ -1060,7 +1238,7 @@
             }
           },
           getLocaleDate(date, shiftDate = 0) {
-            date.setDate(date.getDate() + shiftDate)
+            date.setDate(date.getDate() + shiftDate);
             return date.toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
