@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue Test</title>
+
+    <!-- This is a development version of Vue.js! -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- Google fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap v5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      .experiment-block {
+        max-width: 768px;
+        margin: auto;
+        padding-top: 5em;
+      }
+      .cart-items-container {
+        border: 1px solid rgb(201, 201, 211);
+        border-radius: 10px;
+        overflow: hidden;
+        .title-section {
+          background-color: rgb(201, 201, 211);
+          padding: 15px 35px;
+          h2 {
+            font-weight: 700;
+          }
+        }
+        .item:not(:last-child) {
+          border-bottom: 1px solid rgb(201, 201, 211);
+        }
+        .item {
+          display: grid;
+          width: 100%;
+          grid-template-columns: 1fr 1fr 4.5fr;
+          .checkbox-container {
+            display: flex;
+            justify-content: center;
+            input[type="checkbox"] {
+              width: 30px;
+            }
+          }
+          .item-image {
+            max-width: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+              width: 100%;
+              height: fit-content;
+            }
+          }
+          .item-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px 0;
+            padding-right: 20px;
+            p {
+              font-weight: 800;
+              font-family: "Nunito";
+              margin: 0;
+            }
+          }
+        }
+      }
+      .subtotal {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        p {
+          color: green;
+          font-size: large;
+        }
+        :nth-child(2) {
+          font-weight: 700;
+        }
+      }
+      .buy-now-section {
+        display: flex;
+        width: 100%;
+        button {
+          display: flex;
+          justify-content: center;
+          column-gap: 4px;
+          align-items: center;
+          flex-grow: 1;
+          background-color: black;
+          color: white;
+          text-transform: uppercase;
+          font-weight: 700;
+          letter-spacing: 2.5px;
+          font-size: x-large;
+          border: none;
+          padding: 20px;
+          box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
+          transition: box-shadow 0.3 ease;
+        }
+        button:hover {
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+      }
+      .available-section {
+        margin-top: 10px;
+        display: flex;
+        width: 100%;
+        button {
+          flex-grow: 1;
+          background-color: rgb(255, 250, 240);
+          color: orange;
+          letter-spacing: 2.5px;
+          font-size: x-large;
+          border: 1px solid orange;
+          padding: 20px;
+          box-shadow: 0 0 0 rgba(255, 166, 0, 0.5);
+          transition: box-shadow 0.3 ease;
+          span {
+            font-weight: 900;
+          }
+        }
+        button:hover {
+          box-shadow: 2px 2px 5px rgba(255, 166, 0, 0.5);
+        }
+      }
+      .shop-and-money {
+        display: flex;
+        margin-top: 20px;
+      }
+      .shop-now,
+      .money-back {
+        padding-left: 20px;
+        padding-right: 20px;
+        font-family: "Nunito";
+        color: rgba(128, 128, 128, 0.8);
+        font-weight: 600;
+        font-size: x-large;
+        display: flex;
+        width: 50%;
+        align-items: center;
+        justify-content: center;
+        column-gap: 20px;
+        border-bottom: 3px solid rgba(128, 128, 128, 0.2);
+        :nth-child(1) {
+          font-size: 78px;
+          line-height: 78px;
+        }
+      }
+      .shop-now {
+        border-right: 3px solid rgba(128, 128, 128, 0.2);
+      }
+      .payment-methods {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        column-gap: 20px;
+        .method {
+          width: 100%;
+          height: auto;
+          border: 1px solid rgba(128, 128, 128, 0.2);
+          display: flex;
+          justify-content: center;
+          padding: 0 10px;
+          border-radius: 10px;
+          img {
+            object-fit: contain;
+            width: 100%;
+          }
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app" class="experiment-block">
+      <div class="cart-items-container">
+        <div class="title-section">
+          <h2>Passt perfekt dazu:</h2>
+        </div>
+        <div v-for="item in checkoutItems" :key="item.name" class="item">
+          <div class="checkbox-container">
+            <input v-model="item.checked" type="checkbox" />
+          </div>
+          <div class="item-image">
+            <img :src="item.imgSrc" alt="" />
+          </div>
+          <div class="item-details">
+            <p>{{ item.name }} - €{{ item.price }}</p>
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="subtotal">
+        <p>Subtotal:</p>
+        <p>€104,90</p>
+      </div>
+      <div class="buy-now-section">
+        <button>
+          <span> jetzt kaufen </span>
+          <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+          <svg
+            fill="#fff"
+            width="32px"
+            height="32px"
+            viewBox="0 0 24 24"
+            version="1.2"
+            baseProfile="tiny"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10.586 6.586c-.781.779-.781 2.047 0 2.828l1.586 1.586h-7.244c-1.104 0-2 .895-2 2 0 1.104.896 2 2 2h7.244l-1.586 1.586c-.781.779-.781 2.047 0 2.828.391.391.902.586 1.414.586s1.023-.195 1.414-.586l6.414-6.414-6.414-6.414c-.781-.781-2.047-.781-2.828 0z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="available-section">
+        <button>Nur noch wenige Stucke erhaltlich!</button>
+      </div>
+      <div class="shop-and-money">
+        <div class="shop-now">
+          <span>K.</span>
+          <span
+            >Shoppe jetzt.<br />
+            Bezahle spater.</span
+          >
+        </div>
+        <div class="money-back">
+          <?xml version="1.0" encoding="iso-8859-1"?>
+          <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+          <svg
+            fill="rgba(128, 128, 128, 0.8)"
+            height="60px"
+            width="60px"
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 330 330"
+            xml:space="preserve"
+          >
+            <g id="XMLID_509_">
+              <path
+                id="XMLID_510_"
+                d="M65,330h200c8.284,0,15-6.716,15-15V145c0-8.284-6.716-15-15-15h-15V85c0-46.869-38.131-85-85-85
+                S80,38.131,80,85v45H65c-8.284,0-15,6.716-15,15v170C50,323.284,56.716,330,65,330z M180,234.986V255c0,8.284-6.716,15-15,15
+                s-15-6.716-15-15v-20.014c-6.068-4.565-10-11.824-10-19.986c0-13.785,11.215-25,25-25s25,11.215,25,25
+                C190,223.162,186.068,230.421,180,234.986z M110,85c0-30.327,24.673-55,55-55s55,24.673,55,55v45H110V85z"
+              />
+            </g>
+          </svg>
+          <span>30 Tage<br />Geld-zuruck-Garanite.</span>
+        </div>
+      </div>
+      <div class="payment-methods">
+        <div v-for="method in paymentMethods" :key="method" class="method">
+          <img :src="method" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="./js/zoomOnHover.js"></script>
+    <script type="module">
+      const app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            paymentMethods: [
+              "./assets/Visa_logo.png",
+              "./assets/Mastercard-logo.png",
+              "./assets/American-express.png",
+              "./assets/Paypal-logo.png",
+              "./assets/Google_Pay_Logo.png",
+              "./assets/Apple-pay-logo.png",
+              "./assets/klarna.png",
+            ],
+            checkoutItems: [
+              {
+                checked: true,
+                imgSrc: "./assets/ring.png",
+                name: "ZIRKONIA OHRRINGE",
+                price: "29,95",
+                description:
+                  "DIESE AUS EDELSTAHL MIT WEISSGOLD-VEREDELUNG ERGANZEN SICH MIT DER KETTE PERFEKT.",
+              },
+              {
+                checked: true,
+                imgSrc: "./assets/gold-ring.png",
+                name: "ZIRKONIA OHRSTECKER",
+                price: "15,00",
+                description:
+                  "6MM KUBISCH 18K WEISSGOLD KUBISCH 18K WEISSGOLD KUBIK-ZIRKONIA",
+              },
+              {
+                checked: false,
+                imgSrc: "./assets/two-gold-rings.png",
+                name: "GESCHENKTASCHE",
+                price: "7,95",
+                description: "DIY - GESCHENKTASCHE",
+              },
+            ],
+          };
+        },
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
