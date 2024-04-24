@@ -1,642 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Vue Test</title>
 
-    <!-- This is a development version of Vue.js! -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue Test</title>
 
-    <!-- Google fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans"
-      rel="stylesheet"
-    />
-    <!-- Bootstrap v5 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-      rel="stylesheet"
-    />
+  <!-- This is a development version of Vue.js! -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <style>
-      .experiment-block {
-        margin: auto;
-        padding-top: 5em;
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+  <!-- Bootstrap v5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    .experiment-block {
+      margin: auto;
+      padding-top: 5em;
+    }
+
+    .shopify-section {
+      margin-top: 30px;
+      padding: 10px 0 10px 0;
+    }
+
+    .shopify-section:nth-of-type(odd) {
+      background-color: #fff9f0;
+    }
+
+    .index-section {
+      margin: 20px 0;
+      font-family: "Nunito";
+      font-size: 16px;
+    }
+
+    .page-full,
+    .page-width {
+      padding: 0 17px;
+    }
+
+    .feature-row-wrapper .feature-row__text {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .feature-row__text {
+      flex: 0 1 43%;
+      min-width: 43%;
+      padding: 0;
+    }
+
+    .feature-row__item {
+      flex: 0 1 57%;
+      margin: 0 auto;
+    }
+
+    .feature-row--50 .feature-row__images {
+      max-width: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .feature-row-wrapper .feature-row__images {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .feature-row__item {
+      flex: 0 1 57%;
+      margin: 0 auto;
+    }
+
+    .h5 {
+      font-size: 0.8em;
+      letter-spacing: 0.3em;
+      margin-bottom: 10px;
+      text-transform: none;
+    }
+
+    .h3,
+    .h5,
+    h2 {
+      display: block;
+      margin: 0 0 10px;
+    }
+
+    .h3,
+    h2 {
+      font-weight: bold;
+      letter-spacing: 0.025em;
+      line-height: 1;
+    }
+
+    .h3 {
+      font-size: 18.7px;
+    }
+
+    .subheading {
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
+    .feature-row__text .rte {
+      margin: 0;
+    }
+
+    .rte:last-child {
+      margin-bottom: 0;
+    }
+
+    .rte {
+      margin-bottom: 7.5px;
+    }
+
+    .appear-delay-2 {
+      transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.22s,
+        opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.32s;
+    }
+
+    .feature-row--50 .feature-row__images {
+      max-width: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .feature-row-wrapper .feature-row__images {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .feature-row__item {
+      flex: 0 1 57%;
+      margin: 0 auto;
+    }
+
+    .aos-animate[data-aos="image-fade-in"] .image-element {
+      animation: fade-in 0.5s cubic-bezier(0.29, 0.65, 0.58, 1) forwards;
+    }
+
+    .image-element {
+      opacity: 1 !important;
+    }
+
+    .feature-row__image {
+      display: block;
+      margin: 0 auto;
+      order: 1;
+    }
+
+    .image-element {
+      opacity: 0;
+    }
+
+    img {
+      border: 0 none;
+      display: block;
+      max-width: 100%;
+    }
+
+    @media only screen and (min-width: 769px) {
+      .feature-row__image {
+        order: 2;
       }
-      .shopify-section {
-        margin-top: 30px;
-        padding: 10px 0 10px 0;
-      }
-      .shopify-section:nth-of-type(odd) {
-        background-color: #fff9f0;
-      }
-      .index-section {
-        margin: 20px 0;
-        font-family: "Nunito";
-        font-size: 16px;
-      }
-      .page-full,
-      .page-width {
-        padding: 0 17px;
-      }
-      .feature-row-wrapper .feature-row__text {
-        min-width: 0;
-        width: 100%;
-      }
-      .feature-row__text {
-        flex: 0 1 43%;
-        min-width: 43%;
-        padding: 0;
-      }
-      .feature-row__item {
-        flex: 0 1 57%;
-        margin: 0 auto;
-      }
+
       .feature-row--50 .feature-row__images {
-        max-width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
+        flex: 0 1 50%;
+        max-width: none;
+        padding-left: 0;
+        padding-right: 0;
       }
-      .feature-row-wrapper .feature-row__images {
-        min-width: 0;
-        width: 100%;
+
+      .rte {
+        margin-bottom: 15px;
       }
-      .feature-row__item {
-        flex: 0 1 57%;
-        margin: 0 auto;
-      }
-      .h5 {
-        font-size: 0.8em;
-        letter-spacing: 0.3em;
-        margin-bottom: 10px;
-        text-transform: none;
-      }
+
       .h3,
       .h5,
       h2 {
-        display: block;
-        margin: 0 0 10px;
-      }
-      .h3,
-      h2 {
-        font-weight: bold;
-        letter-spacing: 0.025em;
-        line-height: 1;
-      }
-      .h3 {
-        font-size: 18.7px;
-      }
-      .subheading {
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
+        margin: 0 0 15px;
       }
 
-      .feature-row__text .rte {
-        margin: 0;
-      }
-      .rte:last-child {
-        margin-bottom: 0;
-      }
-      .rte {
-        margin-bottom: 7.5px;
-      }
-      .appear-delay-2 {
-        transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.22s,
-          opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.32s;
-      }
       .feature-row--50 .feature-row__images {
-        max-width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
+        flex: 0 1 50%;
+        max-width: none;
+        padding-left: 0;
+        padding-right: 0;
       }
-      .feature-row-wrapper .feature-row__images {
-        min-width: 0;
+
+      .index-section {
+        margin: 60px 0;
+      }
+
+      .page-full,
+      .page-width {
+        padding: 0 40px;
+      }
+
+      .feature-row__text--right {
+        padding-right: 60px;
+      }
+
+      .feature-row__text--left {
+        padding-left: 60px;
+      }
+
+      .feature-row-wrapper .feature-row__text {
+        flex: 0 1 43%;
+        min-width: 43%;
+      }
+    }
+
+    .feature-row-wrapper {
+      direction: ltr;
+      overflow: hidden;
+    }
+
+    .page-width {
+      margin: 0 auto;
+      max-width: 1500px;
+    }
+
+    .feature-row {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+
+    .shopify-section:nth-of-type(even) .feature-row {
+      flex-direction: row-reverse;
+    }
+
+    @media only screen and (min-width: 1050px) {
+      .feature-row {
+        margin: 0 6%;
+      }
+    }
+
+    .text-left {
+      text-align: left !important;
+    }
+
+    .image-wrap {
+      height: 0;
+      padding-bottom: 66.66666666666667%;
+      background: white;
+      overflow: hidden;
+      position: relative;
+
+      .image-element {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
         width: 100%;
       }
-      .feature-row__item {
-        flex: 0 1 57%;
-        margin: 0 auto;
-      }
-      .aos-animate[data-aos="image-fade-in"] .image-element {
-        animation: fade-in 0.5s cubic-bezier(0.29, 0.65, 0.58, 1) forwards;
-      }
 
-      .image-element {
-        opacity: 1 !important;
-      }
-      .feature-row__image {
-        display: block;
-        margin: 0 auto;
-        order: 1;
-      }
-      .image-element {
-        opacity: 0;
-      }
       img {
-        border: 0 none;
-        display: block;
-        max-width: 100%;
+        height: auto;
+        -o-object-fit: cover;
+        object-fit: cover;
+        width: 100%;
       }
-      @media only screen and (min-width: 769px) {
-        .feature-row__image {
-          order: 2;
-        }
-        .feature-row--50 .feature-row__images {
-          flex: 0 1 50%;
-          max-width: none;
-          padding-left: 0;
-          padding-right: 0;
-        }
-        .rte {
-          margin-bottom: 15px;
-        }
-        .h3,
-        .h5,
-        h2 {
-          margin: 0 0 15px;
-        }
-        .feature-row--50 .feature-row__images {
-          flex: 0 1 50%;
-          max-width: none;
-          padding-left: 0;
-          padding-right: 0;
-        }
-        .index-section {
-          margin: 60px 0;
-        }
-        .page-full,
-        .page-width {
-          padding: 0 40px;
-        }
-        .feature-row__text--right {
-          padding-right: 60px;
-        }
-        .feature-row__text--left {
-          padding-left: 60px;
-        }
+    }
+  </style>
+</head>
 
-        .feature-row-wrapper .feature-row__text {
-          flex: 0 1 43%;
-          min-width: 43%;
-        }
-      }
-      .feature-row-wrapper {
-        direction: ltr;
-        overflow: hidden;
-      }
-
-      .page-width {
-        margin: 0 auto;
-        max-width: 1500px;
-      }
-      .feature-row {
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
-        margin: 0 auto;
-      }
-      .shopify-section:nth-of-type(even) .feature-row {
-        flex-direction: row-reverse;
-      }
-
-      @media only screen and (min-width: 1050px) {
-        .feature-row {
-          margin: 0 6%;
-        }
-      }
-      .text-left {
-        text-align: left !important;
-      }
-      .image-wrap {
-        height: 0;
-        padding-bottom: 66.66666666666667%;
-        background: white;
-        overflow: hidden;
-        position: relative;
-        .image-element {
-          height: 100%;
-          left: 0;
-          position: absolute;
-          top: 0;
-          width: 100%;
-        }
-        img {
-          height: auto;
-          -o-object-fit: cover;
-          object-fit: cover;
-          width: 100%;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div id="app" class="experiment-block">
-      <!-- light yellow background -->
-      <div class="shopify-section">
-        <div class="index-section">
-          <div class="padding__side_both">
-            <div class="page-width feature-row-wrapper feature-row--50">
-              <div class="feature-row">
-                <div
-                  class="feature-row__item feature-row__text feature-row__text--right text-left aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="subheading appear-delay h5">
-                    Kreativ Geld schenken
-                  </div>
-                  <h2 class="h3 appear-delay-1">
-                    Perfektes Geschenk zur Hochzeit
-                  </h2>
-                  <div class="rte appear-delay-2">
-                    <p>
-                      <span class="metafield-multi_line_text_field"
-                        >Die Darstellung des Brautpaares in ihrem Hochzeitsauto,
-                        an dem Du gerollte Geldscheine anbringen kannst, macht
-                        das Poster es zum persönlichen Geldgeschenk.</span
-                      >
-                    </p>
-                  </div>
+<body>
+  <div id="app" class="experiment-block">
+    <!-- light yellow background -->
+    <div class="shopify-section">
+      <div class="index-section">
+        <div class="padding__side_both">
+          <div class="page-width feature-row-wrapper feature-row--50">
+            <div class="feature-row">
+              <div class="feature-row__item feature-row__text feature-row__text--right text-left aos-init aos-animate"
+                data-aos="">
+                <div class="subheading appear-delay h5">
+                  Kreativ Geld schenken
                 </div>
-                <div
-                  class="feature-row__item feature-row__images aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="feature-row__first-image">
-                    <div
-                      class="image-wrap loaded"
-                      style="height: 0; padding-bottom: 66.66666666666667%"
-                    >
-                      <image-element
-                        data-aos="image-fade-in"
-                        data-aos-offset="150"
-                        class="aos-init aos-animate"
-                      >
-                        <img
-                          src="https://famwalls.com/cdn/shop/files/Section_Image_01_24_a5fcf436-c61a-43ae-ae8e-f2dd47bcea51.webp?v=1711470883&amp;width=1080"
-                          alt=""
-                          srcset="
+                <h2 class="h3 appear-delay-1">
+                  Perfektes Geschenk zur Hochzeit
+                </h2>
+                <div class="rte appear-delay-2">
+                  <p>
+                    <span class="metafield-multi_line_text_field">Die Darstellung des Brautpaares in ihrem
+                      Hochzeitsauto,
+                      an dem Du gerollte Geldscheine anbringen kannst, macht
+                      das Poster es zum persönlichen Geldgeschenk.</span>
+                  </p>
+                </div>
+              </div>
+              <div class="feature-row__item feature-row__images aos-init aos-animate" data-aos="">
+                <div class="feature-row__first-image">
+                  <div class="image-wrap loaded" style="height: 0; padding-bottom: 66.66666666666667%">
+                    <image-element data-aos="image-fade-in" data-aos-offset="150" class="aos-init aos-animate">
+                      <img
+                        src="https://famwalls.com/cdn/shop/files/Section_Image_01_24_a5fcf436-c61a-43ae-ae8e-f2dd47bcea51.webp?v=1711470883&amp;width=1080"
+                        alt="" srcset="
                             https://famwalls.com/cdn/shop/files/Section_Image_01_24_a5fcf436-c61a-43ae-ae8e-f2dd47bcea51.webp?v=1711470883&amp;width=180   180w,
                             https://famwalls.com/cdn/shop/files/Section_Image_01_24_a5fcf436-c61a-43ae-ae8e-f2dd47bcea51.webp?v=1711470883&amp;width=360   360w,
                             https://famwalls.com/cdn/shop/files/Section_Image_01_24_a5fcf436-c61a-43ae-ae8e-f2dd47bcea51.webp?v=1711470883&amp;width=540   540w,
                             https://famwalls.com/cdn/shop/files/Section_Image_01_24_a5fcf436-c61a-43ae-ae8e-f2dd47bcea51.webp?v=1711470883&amp;width=750   750w,
                             https://famwalls.com/cdn/shop/files/Section_Image_01_24_a5fcf436-c61a-43ae-ae8e-f2dd47bcea51.webp?v=1711470883&amp;width=900   900w,
                             https://famwalls.com/cdn/shop/files/Section_Image_01_24_a5fcf436-c61a-43ae-ae8e-f2dd47bcea51.webp?v=1711470883&amp;width=1080 1080w
-                          "
-                          loading="lazy"
-                          class="feature-row__image image-element"
-                          sizes="(min-width: 769px) 50vw, 100vw"
-                        />
-                      </image-element>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- white background -->
-      <div class="shopify-section">
-        <div class="index-section">
-          <div class="padding__side_both">
-            <div class="page-width feature-row-wrapper feature-row--50">
-              <div class="feature-row">
-                <div
-                  class="feature-row__item feature-row__text feature-row__text--left text-left aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="subheading appear-delay h5">
-                    Qualität im Detail
-                  </div>
-                  <h2 class="h3 appear-delay-1">
-                    Digitaldruck in höchster Qualität
-                  </h2>
-                  <div class="rte appear-delay-2">
-                    <p>
-                      <span class="metafield-multi_line_text_field"
-                        >Dein personalisiertes Acrylglas wird mit kräftigen
-                        Farben und einem seidenmatten Finish bedruckt. So sieht
-                        es nicht nur wunderschön aus, sondern ist auch besonders
-                        langlebig. Ideal zur individuellen Dekoration
-                        zuhause.</span
-                      >
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="feature-row__item feature-row__images aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="feature-row__first-image">
-                    <div
-                      class="image-wrap loaded"
-                      style="height: 0; padding-bottom: 66.66666666666667%"
-                    >
-                      <image-element
-                        data-aos="image-fade-in"
-                        data-aos-offset="150"
-                        class="aos-init aos-animate"
-                      >
-                        <img
-                          src="https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=1080"
-                          alt=""
-                          srcset="
-                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=180   180w,
-                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=360   360w,
-                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=540   540w,
-                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=750   750w,
-                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=900   900w,
-                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=1080 1080w
-                          "
-                          loading="lazy"
-                          class="feature-row__image image-element"
-                          sizes="(min-width: 769px) 50vw, 100vw"
-                        />
-                      </image-element>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- light yellow background -->
-      <div class="shopify-section">
-        <div class="index-section">
-          <div class="padding__side_both">
-            <div class="page-width feature-row-wrapper feature-row--50">
-              <div class="feature-row">
-                <div
-                  class="feature-row__item feature-row__text feature-row__text--right text-left aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="subheading appear-delay h5">
-                    Minimalistisch mit Stil
-                  </div>
-                  <h2 class="h3 appear-delay-1">
-                    Hochwertiger Premium-Holzfuß
-                  </h2>
-                  <div class="rte appear-delay-2">
-                    <p>
-                      <span class="metafield-multi_line_text_field"
-                        >Um das Acrylglas aufzustellen, kannst du direkt einen
-                        hochwertigen Holzfuß mitbestellen. Er wird handgefertigt
-                        und ist perfekt auf die Größe deines Kunstwerks
-                        abgestimmt, sodass sich ein stimmiges Gesamtbild
-                        ergibt.</span
-                      >
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="feature-row__item feature-row__images aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="feature-row__first-image">
-                    <div
-                      class="image-wrap loaded"
-                      style="height: 0; padding-bottom: 66.66666666666667%"
-                    >
-                      <image-element
-                        data-aos="image-fade-in"
-                        data-aos-offset="150"
-                        class="aos-init aos-animate"
-                      >
-                        <img
-                          src="https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=1080"
-                          alt=""
-                          srcset="
-                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=180   180w,
-                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=360   360w,
-                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=540   540w,
-                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=750   750w,
-                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=900   900w,
-                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=1080 1080w
-                          "
-                          loading="lazy"
-                          class="feature-row__image image-element"
-                          sizes="(min-width: 769px) 50vw, 100vw"
-                        />
-                      </image-element>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- white background -->
-      <div class="shopify-section">
-        <div class="index-section">
-          <div class="padding__side_both">
-            <div class="page-width feature-row-wrapper feature-row--50">
-              <div class="feature-row">
-                <div
-                  class="feature-row__item feature-row__text feature-row__text--left text-left aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="subheading appear-delay h5">
-                    Direkt zu dir nach Hause
-                  </div>
-                  <h2 class="h3 appear-delay-1">
-                    Blitzschneller Expressversand
-                  </h2>
-                  <div class="rte appear-delay-2">
-                    <p>
-                      <span class="metafield-multi_line_text_field"
-                        >Dein Produkt wird in Deutschland produziert und ist
-                        meistens schon innerhalb von 1 bis 2 Werktagen bei dir.
-                        Wir verschicken es blitzschnell per DHL GoGreen direkt
-                        an deine Haustür, an eine Packstation oder in eine
-                        Postfiliale.</span
-                      >
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="feature-row__item feature-row__images aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="feature-row__first-image">
-                    <div
-                      class="image-wrap loaded"
-                      style="height: 0; padding-bottom: 66.66666666666667%"
-                    >
-                      <image-element
-                        data-aos="image-fade-in"
-                        data-aos-offset="150"
-                        class="aos-init aos-animate"
-                      >
-                        <img
-                          src="https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=1080"
-                          alt=""
-                          srcset="
-                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=180   180w,
-                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=360   360w,
-                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=540   540w,
-                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=750   750w,
-                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=900   900w,
-                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=1080 1080w
-                          "
-                          loading="lazy"
-                          class="feature-row__image image-element"
-                          sizes="(min-width: 769px) 50vw, 100vw"
-                        />
-                      </image-element>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- light yellow background -->
-      <div class="shopify-section">
-        <div class="index-section">
-          <div class="padding__side_both">
-            <div class="page-width feature-row-wrapper feature-row--50">
-              <div class="feature-row">
-                <div
-                  class="feature-row__item feature-row__text feature-row__text--right text-left aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="subheading appear-delay h5">
-                    Verantwortung übernehmen
-                  </div>
-                  <h2 class="h3 appear-delay-1">
-                    Umweltfreundliche Produktion
-                  </h2>
-                  <div class="rte appear-delay-2">
-                    <p>
-                      <span class="metafield-multi_line_text_field"
-                        >Nachhaltigkeit liegt uns am Herzen. Alle Produkte
-                        werden deshalb mit umweltfreundlichen Farben in
-                        Deutschland bedruckt und der Versand erfolgt
-                        klimaneutral.</span
-                      >
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="feature-row__item feature-row__images aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="feature-row__second-image">
-                    <div
-                      class="image-wrap loaded"
-                      style="height: 0; padding-bottom: 66.66666666666667%"
-                    >
-                      <image-element
-                        data-aos="image-fade-in"
-                        data-aos-offset="150"
-                        class="aos-init aos-animate"
-                      >
-                        <img
-                          src="https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=1080"
-                          alt=""
-                          srcset="
-                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=180   180w,
-                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=360   360w,
-                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=540   540w,
-                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=750   750w,
-                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=900   900w,
-                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=1080 1080w
-                          "
-                          loading="lazy"
-                          class="feature-row__image image-element"
-                          sizes="(min-width: 769px) 50vw, 100vw"
-                        />
-                      </image-element>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <style>
-          #shopify-section-template--19471259173130__1ab5d94f-0176-464a-b2ca-02c9bd3bc025 {
-            margin-top: 30px;
-            padding: 10px 0 10px 0;
-            background-color: #fff9f0;
-          }
-        </style>
-      </div>
-      <!-- white background -->
-      <div
-        id="shopify-section-template--19471259173130__58b27fcc-212b-4bd0-a3b2-5a7e6013f961"
-        class="shopify-section"
-      >
-        <div class="index-section">
-          <div class="padding__side_both">
-            <div class="page-width feature-row-wrapper feature-row--50">
-              <div class="feature-row">
-                <div
-                  class="feature-row__item feature-row__text feature-row__text--left text-left aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="subheading appear-delay h5">
-                    Junges Startup aus Düsseldorf
-                  </div>
-                  <h2 class="h3 appear-delay-1">
-                    Junges Startup aus Düsseldorf
-                  </h2>
-                  <div class="rte appear-delay-2">
-                    <p>
-                      <span class="metafield-multi_line_text_field"
-                        >Wir haben famwalls gegründet, um mit personalisierten
-                        Produkten ein persönliches Zuhause zu schaffen. Aus
-                        unserem Büro im Herzen von Düsseldorf ist unser
-                        engagiertes Team bei allen Anliegen gerne für dich
-                        da.</span
-                      >
-                    </p>
-                  </div>
-                </div>
-
-                <div
-                  class="feature-row__item feature-row__images aos-init aos-animate"
-                  data-aos=""
-                >
-                  <div class="feature-row__first-image">
-                    <div
-                      class="image-wrap loaded"
-                      style="height: 0; padding-bottom: 66.66666666666667%"
-                    >
-                      <image-element
-                        data-aos="image-fade-in"
-                        data-aos-offset="150"
-                        class="aos-init aos-animate"
-                      >
-                        <img
-                          src="https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=1080"
-                          alt=""
-                          srcset="
-                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=180   180w,
-                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=360   360w,
-                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=540   540w,
-                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=750   750w,
-                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=900   900w,
-                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=1080 1080w
-                          "
-                          loading="lazy"
-                          class="feature-row__image image-element"
-                          sizes="(min-width: 769px) 50vw, 100vw"
-                        />
-                      </image-element>
-                    </div>
+                          " loading="lazy" class="feature-row__image image-element"
+                        sizes="(min-width: 769px) 50vw, 100vw" />
+                    </image-element>
                   </div>
                 </div>
               </div>
@@ -645,16 +320,261 @@
         </div>
       </div>
     </div>
+    <!-- white background -->
+    <div class="shopify-section">
+      <div class="index-section">
+        <div class="padding__side_both">
+          <div class="page-width feature-row-wrapper feature-row--50">
+            <div class="feature-row">
+              <div class="feature-row__item feature-row__text feature-row__text--left text-left aos-init aos-animate"
+                data-aos="">
+                <div class="subheading appear-delay h5">
+                  Qualität im Detail
+                </div>
+                <h2 class="h3 appear-delay-1">
+                  Digitaldruck in höchster Qualität
+                </h2>
+                <div class="rte appear-delay-2">
+                  <p>
+                    <span class="metafield-multi_line_text_field">Dein personalisiertes Acrylglas wird mit kräftigen
+                      Farben und einem seidenmatten Finish bedruckt. So sieht
+                      es nicht nur wunderschön aus, sondern ist auch besonders
+                      langlebig. Ideal zur individuellen Dekoration
+                      zuhause.</span>
+                  </p>
+                </div>
+              </div>
+              <div class="feature-row__item feature-row__images aos-init aos-animate" data-aos="">
+                <div class="feature-row__first-image">
+                  <div class="image-wrap loaded" style="height: 0; padding-bottom: 66.66666666666667%">
+                    <image-element data-aos="image-fade-in" data-aos-offset="150" class="aos-init aos-animate">
+                      <img
+                        src="https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=1080"
+                        alt="" srcset="
+                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=180   180w,
+                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=360   360w,
+                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=540   540w,
+                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=750   750w,
+                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=900   900w,
+                            https://famwalls.com/cdn/shop/files/Section_Image_02_22_1f022010-2c21-46be-926a-7af8c50a317b.webp?v=1711470899&amp;width=1080 1080w
+                          " loading="lazy" class="feature-row__image image-element"
+                        sizes="(min-width: 769px) 50vw, 100vw" />
+                    </image-element>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- light yellow background -->
+    <div class="shopify-section">
+      <div class="index-section">
+        <div class="padding__side_both">
+          <div class="page-width feature-row-wrapper feature-row--50">
+            <div class="feature-row">
+              <div class="feature-row__item feature-row__text feature-row__text--right text-left aos-init aos-animate"
+                data-aos="">
+                <div class="subheading appear-delay h5">
+                  Minimalistisch mit Stil
+                </div>
+                <h2 class="h3 appear-delay-1">
+                  Hochwertiger Premium-Holzfuß
+                </h2>
+                <div class="rte appear-delay-2">
+                  <p>
+                    <span class="metafield-multi_line_text_field">Um das Acrylglas aufzustellen, kannst du direkt einen
+                      hochwertigen Holzfuß mitbestellen. Er wird handgefertigt
+                      und ist perfekt auf die Größe deines Kunstwerks
+                      abgestimmt, sodass sich ein stimmiges Gesamtbild
+                      ergibt.</span>
+                  </p>
+                </div>
+              </div>
+              <div class="feature-row__item feature-row__images aos-init aos-animate" data-aos="">
+                <div class="feature-row__first-image">
+                  <div class="image-wrap loaded" style="height: 0; padding-bottom: 66.66666666666667%">
+                    <image-element data-aos="image-fade-in" data-aos-offset="150" class="aos-init aos-animate">
+                      <img
+                        src="https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=1080"
+                        alt="" srcset="
+                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=180   180w,
+                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=360   360w,
+                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=540   540w,
+                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=750   750w,
+                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=900   900w,
+                            https://famwalls.com/cdn/shop/files/Holzfuss-Quer_1_ac397a3e-ebdf-41fd-bb3b-175f7c8df900.webp?v=1711463893&amp;width=1080 1080w
+                          " loading="lazy" class="feature-row__image image-element"
+                        sizes="(min-width: 769px) 50vw, 100vw" />
+                    </image-element>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- white background -->
+    <div class="shopify-section">
+      <div class="index-section">
+        <div class="padding__side_both">
+          <div class="page-width feature-row-wrapper feature-row--50">
+            <div class="feature-row">
+              <div class="feature-row__item feature-row__text feature-row__text--left text-left aos-init aos-animate"
+                data-aos="">
+                <div class="subheading appear-delay h5">
+                  Direkt zu dir nach Hause
+                </div>
+                <h2 class="h3 appear-delay-1">
+                  Blitzschneller Expressversand
+                </h2>
+                <div class="rte appear-delay-2">
+                  <p>
+                    <span class="metafield-multi_line_text_field">Dein Produkt wird in Deutschland produziert und ist
+                      meistens schon innerhalb von 1 bis 2 Werktagen bei dir.
+                      Wir verschicken es blitzschnell per DHL GoGreen direkt
+                      an deine Haustür, an eine Packstation oder in eine
+                      Postfiliale.</span>
+                  </p>
+                </div>
+              </div>
+              <div class="feature-row__item feature-row__images aos-init aos-animate" data-aos="">
+                <div class="feature-row__first-image">
+                  <div class="image-wrap loaded" style="height: 0; padding-bottom: 66.66666666666667%">
+                    <image-element data-aos="image-fade-in" data-aos-offset="150" class="aos-init aos-animate">
+                      <img src="https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=1080"
+                        alt="" srcset="
+                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=180   180w,
+                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=360   360w,
+                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=540   540w,
+                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=750   750w,
+                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=900   900w,
+                            https://famwalls.com/cdn/shop/files/DHL-Section-Image_1.png?v=1709809067&amp;width=1080 1080w
+                          " loading="lazy" class="feature-row__image image-element"
+                        sizes="(min-width: 769px) 50vw, 100vw" />
+                    </image-element>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- light yellow background -->
+    <div class="shopify-section">
+      <div class="index-section">
+        <div class="padding__side_both">
+          <div class="page-width feature-row-wrapper feature-row--50">
+            <div class="feature-row">
+              <div class="feature-row__item feature-row__text feature-row__text--right text-left aos-init aos-animate"
+                data-aos="">
+                <div class="subheading appear-delay h5">
+                  Verantwortung übernehmen
+                </div>
+                <h2 class="h3 appear-delay-1">
+                  Umweltfreundliche Produktion
+                </h2>
+                <div class="rte appear-delay-2">
+                  <p>
+                    <span class="metafield-multi_line_text_field">Nachhaltigkeit liegt uns am Herzen. Alle Produkte
+                      werden deshalb mit umweltfreundlichen Farben in
+                      Deutschland bedruckt und der Versand erfolgt
+                      klimaneutral.</span>
+                  </p>
+                </div>
+              </div>
+              <div class="feature-row__item feature-row__images aos-init aos-animate" data-aos="">
+                <div class="feature-row__second-image">
+                  <div class="image-wrap loaded" style="height: 0; padding-bottom: 66.66666666666667%">
+                    <image-element data-aos="image-fade-in" data-aos-offset="150" class="aos-init aos-animate">
+                      <img src="https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=1080"
+                        alt="" srcset="
+                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=180   180w,
+                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=360   360w,
+                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=540   540w,
+                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=750   750w,
+                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=900   900w,
+                            https://famwalls.com/cdn/shop/files/Sustainability.png?v=1697469719&amp;width=1080 1080w
+                          " loading="lazy" class="feature-row__image image-element"
+                        sizes="(min-width: 769px) 50vw, 100vw" />
+                    </image-element>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <style>
+        #shopify-section-template--19471259173130__1ab5d94f-0176-464a-b2ca-02c9bd3bc025 {
+          margin-top: 30px;
+          padding: 10px 0 10px 0;
+          background-color: #fff9f0;
+        }
+      </style>
+    </div>
+    <!-- white background -->
+    <div id="shopify-section-template--19471259173130__58b27fcc-212b-4bd0-a3b2-5a7e6013f961" class="shopify-section">
+      <div class="index-section">
+        <div class="padding__side_both">
+          <div class="page-width feature-row-wrapper feature-row--50">
+            <div class="feature-row">
+              <div class="feature-row__item feature-row__text feature-row__text--left text-left aos-init aos-animate"
+                data-aos="">
+                <div class="subheading appear-delay h5">
+                  Junges Startup aus Düsseldorf
+                </div>
+                <h2 class="h3 appear-delay-1">
+                  Junges Startup aus Düsseldorf
+                </h2>
+                <div class="rte appear-delay-2">
+                  <p>
+                    <span class="metafield-multi_line_text_field">Wir haben famwalls gegründet, um mit personalisierten
+                      Produkten ein persönliches Zuhause zu schaffen. Aus
+                      unserem Büro im Herzen von Düsseldorf ist unser
+                      engagiertes Team bei allen Anliegen gerne für dich
+                      da.</span>
+                  </p>
+                </div>
+              </div>
 
-    <script type="module">
-      const app = new Vue({
-        el: "#app",
-      });
-    </script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+              <div class="feature-row__item feature-row__images aos-init aos-animate" data-aos="">
+                <div class="feature-row__first-image">
+                  <div class="image-wrap loaded" style="height: 0; padding-bottom: 66.66666666666667%">
+                    <image-element data-aos="image-fade-in" data-aos-offset="150" class="aos-init aos-animate">
+                      <img
+                        src="https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=1080"
+                        alt="" srcset="
+                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=180   180w,
+                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=360   360w,
+                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=540   540w,
+                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=750   750w,
+                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=900   900w,
+                            https://famwalls.com/cdn/shop/files/Lyto_Gruender_Lars_Klein_und_Niklas_Mallmann_Casual_1.png?v=1697470602&amp;width=1080 1080w
+                          " loading="lazy" class="feature-row__image image-element"
+                        sizes="(min-width: 769px) 50vw, 100vw" />
+                    </image-element>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    const app = new Vue({
+      el: "#app",
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

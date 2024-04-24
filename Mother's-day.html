@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue Test</title>
+
+  <!-- This is a development version of Vue.js! -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+  <!-- Bootstrap v5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet">
+
+  <style>
+    #app {
+      padding-top: 5em;
+    }
+
+    .section {
+      margin: auto;
+      max-width: 1250px;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    body {
+      font-family: Poppins, sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 15px;
+      text-transform: none;
+      color: #000000;
+      line-height: 1.6em;
+      overflow: auto;
+      background-color: #ffffff;
+    }
+
+    .image-element__wrap {
+      border-radius: 8px 8px 0 0;
+
+      @media (max-width: 769px) {
+        border-radius: unset;
+      }
+
+      max-width: 100%;
+
+      video {
+        max-height: 100%;
+      }
+    }
+
+    .eb-banner-motherday-2024-container {
+      left: 0;
+      top: 20px;
+      margin-left: unset;
+      padding-left: 40px;
+
+      .eb-motherday-2024-heading-title {
+        font-size: 20px;
+        font-weight: 500;
+      }
+
+      .eb-motherday-2024-header-wrapper {
+        line-height: 51px;
+
+        .eb-motherday-2024-header-title {
+          font-size: 50px;
+          font-weight: 700;
+          line-height: 75px;
+          width: fit-content;
+        }
+      }
+
+      .eb-motherday-2024-content {
+        font-size: 15px;
+        line-height: 22px;
+        width: 43%;
+        text-align: left;
+
+        .desktop-only {
+          font-size: 15px;
+          font-weight: 400;
+          height: fit-content;
+          line-height: 22.5px;
+        }
+
+        @media (max-width: 480px) {
+          .mobile-only {
+            text-align: left;
+            width: 50%;
+          }
+        }
+      }
+    }
+
+    .eb-motherday-2024-counter {
+      background-color: #e9e3ff;
+      border-radius: 0 0 8px 8px;
+      height: 145px;
+      margin-top: unset;
+      padding: 0 20px;
+
+      .eb-motherday-2024-title-countdown-wrapper {
+        width: 45%;
+
+        .eb-motherday-2024-title-countdown {
+          font-size: 48px;
+          font-weight: 700;
+          line-height: normal;
+          white-space: nowrap;
+        }
+
+        .eb-motherday-2024-subtitle-countdown {
+          font-size: 24px;
+          font-weight: 500;
+          letter-spacing: 5px;
+          line-height: normal;
+          text-transform: uppercase;
+          white-space: nowrap;
+        }
+      }
+
+      .eb-motherday-2024-countdown-container {
+        width: 50%;
+        gap: 10px;
+
+        .eb-motherday-2024-time-wrapper {
+          border: 2px solid #6b57ac;
+          border-radius: 10px;
+          height: 107px;
+          padding-top: 10px;
+          width: 117px;
+
+          div {
+            gap: 10px;
+
+            .eb-motherday-2024-countdown-number {
+              font-size: 40px;
+              font-weight: 700;
+            }
+
+            .eb-motherday-2024-character {
+              font-size: 20px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+
+    .color_selected {
+      color: #6b57ac !important;
+    }
+
+    .title {
+      color: #6b57ac;
+      margin-bottom: unset;
+      font-size: 24px;
+      font-weight: 600;
+      font-family: Poppins, sans-serif;
+      font-style: normal;
+      text-transform: none;
+      line-height: 1.5;
+      letter-spacing: 0px;
+      text-rendering: optimizeLegibility;
+    }
+
+    .eb-motherday-2024-by-receipts-column-1 {
+      padding: 0 10px;
+      width: 41%;
+
+      .image-element__wrap {
+        border-radius: 8px;
+        max-width: 750px;
+        overflow: hidden;
+
+        @media (max-width: 769px) {
+          border-radius: unset;
+        }
+
+
+        .transition--blur-up {
+          backface-visibility: hidden;
+          transform: translate3d(0, 0, 0);
+          transition: filter 200ms;
+        }
+
+        img {
+          filter: none;
+          transform: scale(1);
+          max-width: 100%;
+          vertical-align: middle;
+          aspect-ratio: auto 750 / 750;
+        }
+      }
+
+      .title-1 {
+        padding-top: 12px;
+      }
+    }
+
+    .by-receipts-title {
+      color: #6b57ac;
+      font-size: 22px;
+      font-weight: 700;
+      position: absolute;
+      top: 0;
+      transition: color .25s ease;
+      width: 100%;
+    }
+
+    .eb-motherday-2024-by-receipts-column-2 {
+      padding: 0 10px;
+      width: 34%;
+
+      .image-element__wrap {
+        max-width: 615px;
+        border-radius: 8px;
+      }
+
+      .title-2 {
+        padding: 12px;
+      }
+
+      .title-3 {
+        padding: 12px;
+        text-align: right;
+      }
+    }
+
+    .eb-motherday-2024-by-receipts-column-3 {
+      padding: 0 10px;
+      width: 25%;
+
+      .image-element__wrap {
+        border-radius: 8px;
+        max-width: 450px;
+        overflow: hidden;
+
+        @media (max-width: 769px) {
+          border-radius: unset;
+        }
+
+
+        .transition--blur-up {
+          backface-visibility: hidden;
+          transform: translate3d(0, 0, 0);
+          transition: filter 200ms;
+        }
+
+        img {
+          filter: none;
+          transform: scale(1);
+          max-width: 100%;
+          vertical-align: middle;
+          aspect-ratio: auto 450 / 750;
+        }
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <section class="section">
+      <div class="w-100">
+
+        <section class="section">
+          <div class="position-relative mb-0">
+            <div class="d-none d-md-block">
+              <div class="d-flex overflow-hidden mx-auto image-element__wrap">
+                <video class="object-cover w-100 inline-block" playsinline="" muted="" autoplay="" loop=""
+                  controlslist="nodownload" data-poster-desktop="null" data-poster-tablet="null"
+                  data-poster-mobile="null" data-poster="null"
+                  poster="https://wanderprints.com/pages/files/Banner_Chinh_thumnail.jpg">
+                  <source data-src="https://cdn.shopify.com/videos/c/o/v/d4f7b0c68b1e423da47c9a485a671663.mp4"
+                    data-src-mobile="https://cdn.shopify.com/videos/c/o/v/d4f7b0c68b1e423da47c9a485a671663.mp4"
+                    data-src-tablet="https://cdn.shopify.com/videos/c/o/v/d4f7b0c68b1e423da47c9a485a671663.mp4"
+                    data-src-desktop="https://cdn.shopify.com/videos/c/o/v/d4f7b0c68b1e423da47c9a485a671663.mp4"
+                    data-width-desktop="1920" data-height-desktop="700" data-width-tablet="1024"
+                    data-height-tablet="700" data-width-mobile="400" data-height-mobile="600" type="video/mp4"
+                    src="https://cdn.shopify.com/videos/c/o/v/d4f7b0c68b1e423da47c9a485a671663.mp4" width="1920"
+                    height="700" />
+                </video>
+              </div>
+            </div>
+            <div class="d-md-none d-block">
+              <div class="d-flex overflow-hidden mx-auto image-element__wrap">
+                <video class="" playsinline="" muted="" autoplay="" loop="" controlslist="nodownload"
+                  data-poster-desktop="null" data-poster-tablet="null" data-poster-mobile="null" data-poster="null"
+                  poster="https://wanderprints.com/pages/files/Banner_Chinh_thumnail.jpg">
+                  <source data-src="https://cdn.shopify.com/videos/c/o/v/d4f7b0c68b1e423da47c9a485a671663.mp4"
+                    data-src-mobile="https://cdn.shopify.com/videos/c/o/v/d4f7b0c68b1e423da47c9a485a671663.mp4"
+                    data-src-tablet="https://cdn.shopify.com/videos/c/o/v/d4f7b0c68b1e423da47c9a485a671663.mp4"
+                    data-src-desktop="https://cdn.shopify.com/videos/c/o/v/d4f7b0c68b1e423da47c9a485a671663.mp4"
+                    data-width-desktop="1920" data-height-desktop="700" data-width-tablet="1024"
+                    data-height-tablet="700" data-width-mobile="400" data-height-mobile="600" type="video/mp4"
+                    src="https://cdn.shopify.com/videos/c/o/v/d4f7b0c68b1e423da47c9a485a671663.mp4" width="1920"
+                    height="700" />
+                </video>
+              </div>
+            </div>
+            <div
+              class="align-items-start d-flex flex-column h-100 justify-content-start position-absolute text-center w-100 eb-banner-motherday-2024-container">
+              <div class="text-white eb-motherday-2024-heading-title">
+                Hot Season 2024
+              </div>
+              <div class="text-white">
+                <div class="d-flex flex-column eb-motherday-2024-header-wrapper">
+                  <div class="eb-motherday-2024-header-title">
+                    Mother’s Day
+                  </div>
+                </div>
+              </div>
+              <div class="text-white d-flex eb-motherday-2024-content">
+                <div class="d-none d-md-block desktop-only">
+                  Mother's Day is more than flowers, it's about celebrating
+                  Mom's one-of-a-kind spirit. Each item is a unique tribute to
+                  the beautiful journey you've shared. This Mother's Day, go
+                  beyond the ordinary and give her a gift as special as she
+                  is.
+                </div>
+                <div class="d-md-none d-block mobile-only">
+                  Mother's Day is more than flowers, it's about celebrating
+                  Mom's one-of-a-kind spirit. This day, go beyond the ordinary
+                  and give her a gift as special as she is.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="align-items-center d-flex justify-content-between w-100 eb-motherday-2024-counter">
+            <div class="d-flex flex-column eb-motherday-2024-title-countdown-wrapper">
+              <div class="eb-motherday-2024-title-countdown color_selected">
+                Mother’s Day
+              </div>
+              <div class="eb-motherday-2024-subtitle-countdown color_selected">
+                WHEN WORDS ARE NOT ENOUGH
+              </div>
+            </div>
+            <div class="d-flex align-items-center h-100 justify-content-end eb-motherday-2024-countdown-container">
+              <div
+                class="d-flex align-items-center justify-content-center eb-motherday-2024-time-wrapper color_selected">
+                <div class="align-items-center d-flex flex-column eb-motherday-2024-days">
+                  <span class="eb-motherday-2024-countdown-number eb-motherday-2024-days-number">00</span>
+                  <span class="eb-motherday-2024-character">DAYS</span>
+                </div>
+              </div>
+              <div
+                class="d-flex align-items-center justify-content-center eb-motherday-2024-time-wrapper color_selected">
+                <div class="align-items-center d-flex flex-column eb-motherday-2024-hours">
+                  <span class="eb-motherday-2024-countdown-number eb-motherday-2024-hours-number">00</span>
+                  <span class="eb-motherday-2024-character">HOURS</span>
+                </div>
+              </div>
+              <div
+                class="d-none d-md-flex align-items-center justify-content-center is-hidden-mobile eb-motherday-2024-time-wrapper color_selected">
+                <div class="align-items-center d-flex flex-column eb-motherday-2024-minutes">
+                  <span class="eb-motherday-2024-countdown-number eb-motherday-2024-minutes-number">00</span>
+                  <span class="eb-motherday-2024-character">MINUTES</span>
+                </div>
+              </div>
+              <div
+                class="d-none d-md-flex align-items-center justify-content-center is-hidden-mobile eb-motherday-2024-time-wrapper color_selected">
+                <div class="align-items-center d-flex flex-column eb-motherday-2024-seconds">
+                  <span class="eb-motherday-2024-countdown-number eb-motherday-2024-seconds-number">00</span>
+                  <span class="eb-motherday-2024-character">SECONDS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="w-100">
+        <section class="section">
+          <h2 class="title text-center">Who’s It For?</h2>
+          <div class="d-flex justify-content-center w-100 mb-2">
+            <p class="w-50 text-center">From Moms and Grandmas to Step-moms and partners; whoever you’re treating, we’ve
+              got everything you need.
+            </p>
+          </div>
+          <div class="d-flex flex-wrap justify-content-between w-100">
+            <a href="https://wanderprints.com/collections/gift-for-mother"
+              class=" eb-motherday-2024-by-receipts-column-1">
+              <div class="eb-motherday-2024-by-receipts-inner h-100 position-relative">
+                <div class="d-none d-md-block is-hidden-mobile-only">
+                  <div class="mx-auto w-100 h-100 image-element__wrap" style=" max-width: 750px;"> <img alt=""
+                      src="https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1600x.jpg?v=1705981641"
+                      data-src="https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1600x.jpg?v=1705981641"
+                      data-sizes="auto" data-aspectratio="750/750"
+                      data-srcset="https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_5000x.jpg?v=1705981641 5000w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_4500x.jpg?v=1705981641 4500w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_4000x.jpg?v=1705981641 4000w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_3500x.jpg?v=1705981641 3500w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_3000x.jpg?v=1705981641 3000w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_2500x.jpg?v=1705981641 2500w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_2000x.jpg?v=1705981641 2000w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1800x.jpg?v=1705981641 1800w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1600x.jpg?v=1705981641 1600w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1400x.jpg?v=1705981641 1400w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1200x.jpg?v=1705981641 1200w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1000x.jpg?v=1705981641 1000w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_800x.jpg?v=1705981641 800w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_600x.jpg?v=1705981641 600w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_400x.jpg?v=1705981641 400w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_200x.jpg?v=1705981641 200w" height="750"
+                      width="750" class="h-100 d-block w-100 mx-auto"
+                      srcset="https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_5000x.jpg?v=1705981641 5000w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_4500x.jpg?v=1705981641 4500w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_4000x.jpg?v=1705981641 4000w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_3500x.jpg?v=1705981641 3500w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_3000x.jpg?v=1705981641 3000w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_2500x.jpg?v=1705981641 2500w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_2000x.jpg?v=1705981641 2000w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1800x.jpg?v=1705981641 1800w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1600x.jpg?v=1705981641 1600w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1400x.jpg?v=1705981641 1400w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1200x.jpg?v=1705981641 1200w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_1000x.jpg?v=1705981641 1000w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_800x.jpg?v=1705981641 800w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_600x.jpg?v=1705981641 600w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_400x.jpg?v=1705981641 400w,
+                      https://wanderprints.com/cdn/shop/files/For_Mom_Destop_4656bf3e-1776-4f9f-9815-e192f060d9ce_200x.jpg?v=1705981641 200w" sizes="493px">
+                  </div>
+
+
+
+                </div>
+                <div class="d-md-none d-block is-hidden-desktop-only">
+                  <div class="mx-auto w-100 h-100 image-element__wrap" style=" max-width: 750px;">
+                    <img src="https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1600x.jpg?v=1705990797"
+                      data-src="https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1600x.jpg?v=1705990797"
+                      data-sizes="auto" data-aspectratio="750/750" data-srcset="https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_5000x.jpg?v=1705990797 5000w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_4500x.jpg?v=1705990797 4500w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_4000x.jpg?v=1705990797 4000w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_3500x.jpg?v=1705990797 3500w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_3000x.jpg?v=1705990797 3000w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_2500x.jpg?v=1705990797 2500w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_2000x.jpg?v=1705990797 2000w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1800x.jpg?v=1705990797 1800w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1600x.jpg?v=1705990797 1600w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1400x.jpg?v=1705990797 1400w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1200x.jpg?v=1705990797 1200w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1000x.jpg?v=1705990797 1000w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_800x.jpg?v=1705990797 800w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_600x.jpg?v=1705990797 600w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_400x.jpg?v=1705990797 400w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_200x.jpg?v=1705990797 200w"
+                      height="750" width="750" class="h-100 d-block w-100 mx-auto" srcset="https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_5000x.jpg?v=1705990797 5000w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_4500x.jpg?v=1705990797 4500w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_4000x.jpg?v=1705990797 4000w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_3500x.jpg?v=1705990797 3500w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_3000x.jpg?v=1705990797 3000w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_2500x.jpg?v=1705990797 2500w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_2000x.jpg?v=1705990797 2000w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1800x.jpg?v=1705990797 1800w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1600x.jpg?v=1705990797 1600w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1400x.jpg?v=1705990797 1400w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1200x.jpg?v=1705990797 1200w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_1000x.jpg?v=1705990797 1000w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_800x.jpg?v=1705990797 800w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_600x.jpg?v=1705990797 600w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_400x.jpg?v=1705990797 400w,
+                        https://wanderprints.com/cdn/shop/files/For_Mom_Mobiles_200x.jpg?v=1705990797 200w"
+                      sizes="346px">
+                  </div>
+                </div>
+                <div class="by-receipts-title title-1 text-center">For Mom</div>
+              </div>
+            </a>
+            <div class="eb-motherday-2024-by-receipts-column-2">
+              <div class="d-flex flex-column h-100 position-relative">
+                <a class="position-relative mb-2" href="https://wanderprints.com/collections/gifts-for-grandma">
+                  <div class="d-none d-md-block">
+                    <div class="image-element__wrap h-100 overflow-hidden mx-auto"> <img alt=""
+                        src="https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1600x.jpg?v=1705981644"
+                        data-src="https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1600x.jpg?v=1705981644"
+                        data-sizes="auto" data-aspectratio="615/360"
+                        data-srcset="https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_5000x.jpg?v=1705981644 5000w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_4500x.jpg?v=1705981644 4500w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_4000x.jpg?v=1705981644 4000w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_3500x.jpg?v=1705981644 3500w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_3000x.jpg?v=1705981644 3000w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_2500x.jpg?v=1705981644 2500w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_2000x.jpg?v=1705981644 2000w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1800x.jpg?v=1705981644 1800w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1600x.jpg?v=1705981644 1600w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1400x.jpg?v=1705981644 1400w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1200x.jpg?v=1705981644 1200w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1000x.jpg?v=1705981644 1000w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_800x.jpg?v=1705981644 800w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_600x.jpg?v=1705981644 600w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_400x.jpg?v=1705981644 400w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_200x.jpg?v=1705981644 200w" height="360"
+                        width="615" class="h-100 d-block w-100 mx-auto"
+                        srcset="https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_5000x.jpg?v=1705981644 5000w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_4500x.jpg?v=1705981644 4500w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_4000x.jpg?v=1705981644 4000w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_3500x.jpg?v=1705981644 3500w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_3000x.jpg?v=1705981644 3000w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_2500x.jpg?v=1705981644 2500w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_2000x.jpg?v=1705981644 2000w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1800x.jpg?v=1705981644 1800w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1600x.jpg?v=1705981644 1600w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1400x.jpg?v=1705981644 1400w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1200x.jpg?v=1705981644 1200w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_1000x.jpg?v=1705981644 1000w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_800x.jpg?v=1705981644 800w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_600x.jpg?v=1705981644 600w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_400x.jpg?v=1705981644 400w,
+                        https://wanderprints.com/cdn/shop/files/For_Grandma_Destop_53d37c0b-c2a5-49b2-9ad8-84f99ad87a96_200x.jpg?v=1705981644 200w" sizes="405px">
+                    </div>
+                  </div>
+                  <div class="d-md-none d-block">
+                    <div class="image-element__wrap"> <img alt=""
+                        src="https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1600x.jpg?v=1705990799"
+                        data-src="https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1600x.jpg?v=1705990799"
+                        data-sizes="auto" data-aspectratio="460/436" data-srcset="https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_5000x.jpg?v=1705990799 5000w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_4500x.jpg?v=1705990799 4500w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_4000x.jpg?v=1705990799 4000w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_3500x.jpg?v=1705990799 3500w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_3000x.jpg?v=1705990799 3000w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_2500x.jpg?v=1705990799 2500w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_2000x.jpg?v=1705990799 2000w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1800x.jpg?v=1705990799 1800w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1600x.jpg?v=1705990799 1600w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1400x.jpg?v=1705990799 1400w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1200x.jpg?v=1705990799 1200w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1000x.jpg?v=1705990799 1000w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_800x.jpg?v=1705990799 800w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_600x.jpg?v=1705990799 600w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_400x.jpg?v=1705990799 400w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_200x.jpg?v=1705990799 200w" height="436"
+                        width="460" class="transition--blur-up lazyautosizes ls-is-cached lazyloaded" srcset="https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_5000x.jpg?v=1705990799 5000w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_4500x.jpg?v=1705990799 4500w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_4000x.jpg?v=1705990799 4000w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_3500x.jpg?v=1705990799 3500w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_3000x.jpg?v=1705990799 3000w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_2500x.jpg?v=1705990799 2500w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_2000x.jpg?v=1705990799 2000w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1800x.jpg?v=1705990799 1800w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1600x.jpg?v=1705990799 1600w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1400x.jpg?v=1705990799 1400w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1200x.jpg?v=1705990799 1200w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_1000x.jpg?v=1705990799 1000w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_800x.jpg?v=1705990799 800w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_600x.jpg?v=1705990799 600w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_400x.jpg?v=1705990799 400w,
+            https://wanderprints.com/cdn/shop/files/For_Grandma_Mob_200x.jpg?v=1705990799 200w" sizes="161px">
+                    </div>
+
+                  </div>
+                  <div class="by-receipts-title title-2">For Grandma</div>
+                </a>
+                <a class="position-relative" style="margin-top: 10px;"
+                  href="https://wanderprints.com/collections/pet-lovers">
+                  <div class="d-none d-md-block">
+                    <div class="h-100 overflow-hidden mx-auto image-element__wrap"> <img alt=""
+                        src="https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1600x.jpg?v=1705981646"
+                        data-src="https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1600x.jpg?v=1705981646"
+                        data-sizes="auto" data-aspectratio="615/360"
+                        data-srcset="https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_5000x.jpg?v=1705981646 5000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_4500x.jpg?v=1705981646 4500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_4000x.jpg?v=1705981646 4000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_3500x.jpg?v=1705981646 3500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_3000x.jpg?v=1705981646 3000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_2500x.jpg?v=1705981646 2500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_2000x.jpg?v=1705981646 2000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1800x.jpg?v=1705981646 1800w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1600x.jpg?v=1705981646 1600w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1400x.jpg?v=1705981646 1400w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1200x.jpg?v=1705981646 1200w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1000x.jpg?v=1705981646 1000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_800x.jpg?v=1705981646 800w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_600x.jpg?v=1705981646 600w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_400x.jpg?v=1705981646 400w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_200x.jpg?v=1705981646 200w" height="360" width="615"
+                        class="h-100 w-100 mx-auto lazyautosizes ls-is-cached lazyloaded"
+                        srcset="https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_5000x.jpg?v=1705981646 5000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_4500x.jpg?v=1705981646 4500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_4000x.jpg?v=1705981646 4000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_3500x.jpg?v=1705981646 3500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_3000x.jpg?v=1705981646 3000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_2500x.jpg?v=1705981646 2500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_2000x.jpg?v=1705981646 2000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1800x.jpg?v=1705981646 1800w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1600x.jpg?v=1705981646 1600w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1400x.jpg?v=1705981646 1400w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1200x.jpg?v=1705981646 1200w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_1000x.jpg?v=1705981646 1000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_800x.jpg?v=1705981646 800w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_600x.jpg?v=1705981646 600w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_400x.jpg?v=1705981646 400w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_Destop_ab211576-30cf-46e8-8084-b2ab31907559_200x.jpg?v=1705981646 200w" sizes="405px">
+                    </div>
+
+                  </div>
+                  <div class="d-md-none d-block">
+                    <div class="h-100 overflow-hidden mx-auto image-element__wrap" style=" max-width: 460px;"> <img
+                        alt="" src="https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1600x.jpg?v=1705990802"
+                        data-src="https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1600x.jpg?v=1705990802"
+                        data-sizes="auto" data-aspectratio="460/436" data-srcset="https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_5000x.jpg?v=1705990802 5000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_4500x.jpg?v=1705990802 4500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_4000x.jpg?v=1705990802 4000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_3500x.jpg?v=1705990802 3500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_3000x.jpg?v=1705990802 3000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_2500x.jpg?v=1705990802 2500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_2000x.jpg?v=1705990802 2000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1800x.jpg?v=1705990802 1800w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1600x.jpg?v=1705990802 1600w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1400x.jpg?v=1705990802 1400w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1200x.jpg?v=1705990802 1200w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1000x.jpg?v=1705990802 1000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_800x.jpg?v=1705990802 800w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_600x.jpg?v=1705990802 600w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_400x.jpg?v=1705990802 400w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_200x.jpg?v=1705990802 200w" height="436"
+                        width="460" class="transition--blur-up lazyautosizes ls-is-cached lazyloaded" srcset="https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_5000x.jpg?v=1705990802 5000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_4500x.jpg?v=1705990802 4500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_4000x.jpg?v=1705990802 4000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_3500x.jpg?v=1705990802 3500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_3000x.jpg?v=1705990802 3000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_2500x.jpg?v=1705990802 2500w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_2000x.jpg?v=1705990802 2000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1800x.jpg?v=1705990802 1800w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1600x.jpg?v=1705990802 1600w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1400x.jpg?v=1705990802 1400w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1200x.jpg?v=1705990802 1200w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_1000x.jpg?v=1705990802 1000w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_800x.jpg?v=1705990802 800w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_600x.jpg?v=1705990802 600w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_400x.jpg?v=1705990802 400w,
+            https://wanderprints.com/cdn/shop/files/For_Pet_Mom_mob_200x.jpg?v=1705990802 200w" sizes="161px">
+                    </div>
+
+
+
+                  </div>
+                  <div class="by-receipts-title title-3">For Pet Mom</div>
+                </a>
+              </div>
+            </div> <a href="https://wanderprints.com/collections/gift-for-sister"
+              class="eb-motherday-2024-by-receipts-column-3">
+              <div class="h-100 position-relative eb-motherday-2024-by-receipts-inner">
+                <div class="h-100 d-none d-md-block">
+
+                  <div class="h-100 image-element__wrap">
+                    <img alt=""
+                      src="https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1600x.jpg?v=1705981650"
+                      data-src="https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1600x.jpg?v=1705981650"
+                      data-sizes="auto" data-aspectratio="450/750"
+                      data-srcset="https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_5000x.jpg?v=1705981650 5000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_4500x.jpg?v=1705981650 4500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_4000x.jpg?v=1705981650 4000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_3500x.jpg?v=1705981650 3500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_3000x.jpg?v=1705981650 3000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_2500x.jpg?v=1705981650 2500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_2000x.jpg?v=1705981650 2000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1800x.jpg?v=1705981650 1800w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1600x.jpg?v=1705981650 1600w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1400x.jpg?v=1705981650 1400w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1200x.jpg?v=1705981650 1200w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1000x.jpg?v=1705981650 1000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_800x.jpg?v=1705981650 800w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_600x.jpg?v=1705981650 600w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_400x.jpg?v=1705981650 400w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_200x.jpg?v=1705981650 200w" height="750" width="450"
+                      class="h-100 w-100"
+                      srcset="https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_5000x.jpg?v=1705981650 5000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_4500x.jpg?v=1705981650 4500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_4000x.jpg?v=1705981650 4000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_3500x.jpg?v=1705981650 3500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_3000x.jpg?v=1705981650 3000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_2500x.jpg?v=1705981650 2500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_2000x.jpg?v=1705981650 2000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1800x.jpg?v=1705981650 1800w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1600x.jpg?v=1705981650 1600w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1400x.jpg?v=1705981650 1400w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1200x.jpg?v=1705981650 1200w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_1000x.jpg?v=1705981650 1000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_800x.jpg?v=1705981650 800w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_600x.jpg?v=1705981650 600w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_400x.jpg?v=1705981650 400w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Destop_5a2c0713-9176-4300-bfcf-4803ab92ab8f_200x.jpg?v=1705981650 200w"
+                      sizes="293px">
+                  </div>
+                </div>
+                <div class="h-100 d-md-none d-block">
+
+
+
+
+
+
+
+
+
+                  <div class="image-element__wrap" style=" max-width: 480px;"> <img alt=""
+                      src="https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1600x.jpg?v=1705990805"
+                      data-src="https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1600x.jpg?v=1705990805"
+                      data-sizes="auto" data-aspectratio="480/900" data-srcset="https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_5000x.jpg?v=1705990805 5000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_4500x.jpg?v=1705990805 4500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_4000x.jpg?v=1705990805 4000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_3500x.jpg?v=1705990805 3500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_3000x.jpg?v=1705990805 3000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_2500x.jpg?v=1705990805 2500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_2000x.jpg?v=1705990805 2000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1800x.jpg?v=1705990805 1800w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1600x.jpg?v=1705990805 1600w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1400x.jpg?v=1705990805 1400w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1200x.jpg?v=1705990805 1200w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1000x.jpg?v=1705990805 1000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_800x.jpg?v=1705990805 800w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_600x.jpg?v=1705990805 600w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_400x.jpg?v=1705990805 400w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_200x.jpg?v=1705990805 200w" height="900"
+                      width="480" class="transition--blur-up lazyautosizes ls-is-cached lazyloaded" srcset="https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_5000x.jpg?v=1705990805 5000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_4500x.jpg?v=1705990805 4500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_4000x.jpg?v=1705990805 4000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_3500x.jpg?v=1705990805 3500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_3000x.jpg?v=1705990805 3000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_2500x.jpg?v=1705990805 2500w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_2000x.jpg?v=1705990805 2000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1800x.jpg?v=1705990805 1800w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1600x.jpg?v=1705990805 1600w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1400x.jpg?v=1705990805 1400w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1200x.jpg?v=1705990805 1200w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_1000x.jpg?v=1705990805 1000w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_800x.jpg?v=1705990805 800w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_600x.jpg?v=1705990805 600w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_400x.jpg?v=1705990805 400w,
+            https://wanderprints.com/cdn/shop/files/For_like_a_mom_Mob_200x.jpg?v=1705990805 200w" sizes="163px">
+                  </div>
+
+
+                </div>
+                <div class="text-center pt-3 by-receipts-title title-4">For Like a Mom</div>
+              </div>
+            </a>
+          </div>
+        </section>
+
+
+      </div>
+    </section>
+  </div>
+
+  <script type="module">
+    const app = new Vue({
+      el: "#app",
+      mounted() {
+        const e = (e) => { return e < 10 ? "0".concat(e) : e }
+        const n = (n) => {
+          var o = n.dayTime, r = n.daysEl, t = n.hoursEl, u = n.minutesEl, a = n.secondsEl, c = new Date(o).getTime(), d = setInterval((function () {
+            var n = (new Date).getTime(), o = c - n, m = Math.floor(o / 864e5), s = Math.floor(o % 864e5 / 36e5), l = Math.floor(o % 36e5 / 6e4), i = Math.floor(o % 6e4 / 1e3);
+            r.innerHTML = "".concat(e(m)), t.innerHTML = "".concat(e(s)), u.innerHTML = "".concat(e(l)), a.innerHTML = "".concat(e(i)), o < 0 && (clearInterval(d), r.innerHTML = "00", t.innerHTML = "00", u.innerHTML = "00", a.innerHTML = "00")
+          }), 1e3)
+        };
+        window.addEventListener("DOMContentLoaded", (function (e) {
+          var o = function () {
+            var e = document.querySelector(".eb-motherday-2024-countdown-number.eb-motherday-2024-days-number"), n = document.querySelector(".eb-motherday-2024-countdown-number.eb-motherday-2024-hours-number"), o = document.querySelector(".eb-motherday-2024-countdown-number.eb-motherday-2024-minutes-number"), r = document.querySelector(".eb-motherday-2024-countdown-number.eb-motherday-2024-seconds-number");
+            return { daysEl: e, hoursEl: n, minutesEl: o, secondsEl: r }
+          }(), r = o.daysEl, t = o.hoursEl, u = o.minutesEl, a = o.secondsEl;
+          n({ dayTime: "May 12, 2024 00:00:00", daysEl: r, hoursEl: t, minutesEl: u, secondsEl: a })
+        }))
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
